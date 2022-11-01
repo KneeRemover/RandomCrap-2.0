@@ -1,11 +1,11 @@
 {
 	"parent": "minecraft:block/cube",
 	"textures": {
-		"particle": "randomcrap:block/bucket_top",
-		"north": "randomcrap:block/bucket_side",
-		"south": "randomcrap:block/bucket_side",
-		"east": "randomcrap:block/bucket_side",
-		"west": "randomcrap:block/bucket_side",
+		"particle": "randomcrap:block/bucket_station_top",
+		"north": "randomcrap:block/bucket_station_front",
+		"south": "randomcrap:block/bucket_station_front",
+		"east": "randomcrap:block/bucket_station_side",
+		"west": "randomcrap:block/bucket_station_side",
 		"up": "randomcrap:block/bucket_top",
 		"down": "randomcrap:block/bucket_bottom"
 	}

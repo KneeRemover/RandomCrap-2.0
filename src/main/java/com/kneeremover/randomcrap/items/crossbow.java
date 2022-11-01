@@ -82,12 +82,11 @@ public class crossbow extends ShootableItem {
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
         int i = this.getUseDuration(stack) - timeLeft;
         float f = getCharge(i, stack);
-        if (f >= 1.0F && !isCharged(stack) && hasAmmo(entityLiving, stack)) {
+        if (f >= 2.0F && !isCharged(stack) && hasAmmo(entityLiving, stack)) {
             setCharged(stack, true);
             SoundCategory soundcategory = entityLiving instanceof PlayerEntity ? SoundCategory.PLAYERS : SoundCategory.HOSTILE;
             worldIn.playSound((PlayerEntity)null, entityLiving.getPosX(), entityLiving.getPosY(), entityLiving.getPosZ(), SoundEvents.ITEM_CROSSBOW_LOADING_END, soundcategory, 1.0F, 1.0F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
         }
-
     }
 
     private static boolean hasAmmo(LivingEntity entityIn, ItemStack stack) {
@@ -298,17 +297,17 @@ public class crossbow extends ShootableItem {
             SoundEvent soundevent = this.getSoundEvent(i);
             SoundEvent soundevent1 = i == 0 ? SoundEvents.ITEM_CROSSBOW_LOADING_MIDDLE : null;
             float f = (float)(stack.getUseDuration() - count) / (float)getChargeTime(stack);
-            if (f < 0.2F) {
+            if (f < 0.4F) {
                 this.isLoadingStart = false;
                 this.isLoadingMiddle = false;
             }
 
-            if (f >= 0.2F && !this.isLoadingStart) {
+            if (f >= 0.4F && !this.isLoadingStart) {
                 this.isLoadingStart = true;
                 worldIn.playSound((PlayerEntity)null, livingEntityIn.getPosX(), livingEntityIn.getPosY(), livingEntityIn.getPosZ(), soundevent, SoundCategory.PLAYERS, 0.5F, 1.0F);
             }
 
-            if (f >= 0.5F && soundevent1 != null && !this.isLoadingMiddle) {
+            if (f >= 1.0F && soundevent1 != null && !this.isLoadingMiddle) {
                 this.isLoadingMiddle = true;
                 worldIn.playSound((PlayerEntity)null, livingEntityIn.getPosX(), livingEntityIn.getPosY(), livingEntityIn.getPosZ(), soundevent1, SoundCategory.PLAYERS, 0.5F, 1.0F);
             }
@@ -353,8 +352,8 @@ public class crossbow extends ShootableItem {
 
     private static float getCharge(int useTime, ItemStack stack) {
         float f = (float)useTime / (float)getChargeTime(stack);
-        if (f > 1.0F) {
-            f = 1.0F;
+        if (f > 2.0F) {
+            f = 2.0F;
         }
 
         return f;
