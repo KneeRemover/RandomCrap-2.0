@@ -1,0 +1,15 @@
+{
+  "name": "Ruby",
+  "icon": "randomcrap:ruby",
+  "category": "randomcrap:basic_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "An ore found Y levels 1-30, this ore is used in just about every basic recipe, as well as some advanced ones. It is extremely important.$(br)Each ore will drop 1-3 rubies, affected by fortune."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "randomcrap:ruby_ore"
+    }
+  ]
+}

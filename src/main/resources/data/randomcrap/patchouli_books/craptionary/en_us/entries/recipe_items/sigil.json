@@ -1,0 +1,16 @@
+{
+  "name": "Sigil",
+  "icon": "randomcrap:sigil",
+  "category": "randomcrap:recipe_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A teleportation core surrounded in $(l:randomcrap:basic_items/energised_stone)Energised Stones$() with writing on it, this item allows you to store locations on it. On it's own it's useless, but if combined with a Handheld Waystone can be extremely useful."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:sigil",
+      "text": "Crafting an Sigil"
+    }
+  ]
+}

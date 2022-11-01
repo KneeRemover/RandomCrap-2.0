@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "-#-",
+    "#$#",
+    "-#-"
+  ],
+  "key": {
+    "#": {
+      "item": "randomcrap:energised_stone"
+    },
+    "$": {
+      "item": "randomcrap:teleportation_core"
+    },
+    "-": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "result": {
+    "item": "randomcrap:sigil"
+  }
+}

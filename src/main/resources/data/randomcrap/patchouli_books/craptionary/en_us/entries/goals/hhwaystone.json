@@ -1,0 +1,21 @@
+{
+  "name": "Handheld Waystone",
+  "icon": "randomcrap:handheld_waystone",
+  "category": "randomcrap:goals",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "text": "This item is a pain to craft, but it is very powerful. Sneak right clicking on a block will save your current position. (The first time after crafting, click twice). This item can be upgraded in an anvil to allow more save slots, which you can switch between by holding the waystone in your offhand and right clicking a block.",
+      "item": "randomcrap:handheld_waystone"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:handheld_waystone"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:sigil",
+      "text": "Combining a waystone with a $(l:randomcrap:recipe_items/sigil)sigil$() in an anvil will upgrade it, increasing the number of save slots. You can add more than one slot at once by putting more sigils in the right slot. After upgrading, all saved locations are lost."
+    }
+  ]
+}

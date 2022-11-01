@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "-#-",
+    "#$#",
+    "-#-"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bookshelf"
+    },
+    "$": {
+      "item": "minecraft:diamond"
+    },
+    "-": {
+      "item": "randomcrap:ruby"
+    }
+  },
+  "result": {
+    "item": "randomcrap:energised_stone"
+  }
+}

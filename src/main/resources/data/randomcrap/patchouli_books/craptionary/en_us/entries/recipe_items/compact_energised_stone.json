@@ -1,0 +1,17 @@
+{
+  "name": "Compact ES",
+  "icon": "randomcrap:compact_energised_stone",
+  "category": "randomcrap:recipe_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "We must make your life difficult. This is just proof of that"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:compact_energised_stone",
+      "text": "Crafting a Compact Energised Stone",
+      "title": "Compact ES"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "randomcrap:block/energised_stone_block"
+  }
+}

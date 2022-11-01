@@ -1,0 +1,17 @@
+{
+  "name": "Animal Fat",
+  "icon": "randomcrap:animal_fat",
+  "category": "randomcrap:basic_items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "randomcrap:animal_fat",
+      "text": "Animal fat is created by right clicking a Butcher Table with one raw beef."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:butcher_table"
+    }
+
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Ruby Block",
+  "icon": "randomcrap:ruby_block",
+  "category": "randomcrap:blocks",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "red shiny but 3d! Used in structures and some crafting recipes."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:ruby_block",
+      "text": "Crafting a Ruby Block"
+    }
+  ]
+}

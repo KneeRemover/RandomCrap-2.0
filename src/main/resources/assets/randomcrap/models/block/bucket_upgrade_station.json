@@ -1,0 +1,12 @@
+{
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"particle": "randomcrap:block/bucket_top",
+		"north": "randomcrap:block/bucket_side",
+		"south": "randomcrap:block/bucket_side",
+		"east": "randomcrap:block/bucket_side",
+		"west": "randomcrap:block/bucket_side",
+		"up": "randomcrap:block/bucket_top",
+		"down": "randomcrap:block/bucket_bottom"
+	}
+}

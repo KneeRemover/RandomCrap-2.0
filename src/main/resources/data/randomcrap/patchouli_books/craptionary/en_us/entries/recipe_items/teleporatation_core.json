@@ -1,0 +1,16 @@
+{
+  "name": "Teleportation Core",
+  "icon": "randomcrap:teleportation_core",
+  "category": "randomcrap:recipe_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "An ender pearl surrounded by $(l:randomcrap:basic_items/energised_stone)Energised Stones$() & plated with $(l:randomcrap:basic_items/ruby)Rubies$(), the teleportation core assists in, well, teleportation!"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:teleportation_core",
+      "text": "Crafting an Teleportation Core"
+    }
+  ]
+}

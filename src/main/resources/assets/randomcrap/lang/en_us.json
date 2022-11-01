@@ -1,0 +1,22 @@
+{
+  "item.randomcrap.ruby": "Ruby",
+  "item.randomcrap.handheld_waystone": "Handheld Waystone",
+  "key.categories.rc": "RandomCrap 2.0",
+  "item.randomcrap.energised_stone": "Energised Stone",
+  "item.randomcrap.sigil": "Sigil",
+  "item.randomcrap.teleportation_core": "Teleportation Core",
+  "block.randomcrap.ruby_block": "Block of Ruby",
+  "block.randomcrap.ruby_ore": "Ruby Ore",
+  "block.randomcrap.oil_cauldron": "Cauldron of Animal Fat",
+  "item.randomcrap.animal_fat": "Animal Fat",
+  "block.randomcrap.butcher_table": "Butchering Table",
+  "block.randomcrap.energised_stone_block": "Compact Energised Stone Block",
+  "block.randomcrap.blue_hopper": "Infusion Hopper",
+  "block.randomcrap.bucket_upgrade_station": "Bucket Upgrade Station",
+  "item.randomcrap.tater_tots": "TATER TOTS",
+  "item.randomcrap.compact_energised_stone": "Compact Energised Stone",
+  "event.randomcrap.multiblock.valid": "Structure valid!",
+  "itemGroup.crapTab": "RandomCrap 2.0",
+  "kneeremover.handheldWaystone.error.unsetPos": "No position has been set!",
+  "kneeremover.handheldWaystone.setPos": "Position set!"
+}

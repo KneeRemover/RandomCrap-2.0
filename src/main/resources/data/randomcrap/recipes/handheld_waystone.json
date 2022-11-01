@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "-!-",
+    "#$#",
+    "-#-"
+  ],
+  "key": {
+    "#": {
+      "item": "randomcrap:energised_stone"
+    },
+    "$": {
+      "item": "randomcrap:teleportation_core"
+    },
+    "!": {
+      "item": "randomcrap:sigil"
+    },
+    "-": {
+      "item": "minecraft:air"
+    }
+  },
+  "result": {
+    "item": "randomcrap:handheld_waystone"
+  }
+}

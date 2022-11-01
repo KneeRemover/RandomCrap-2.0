@@ -1,0 +1,13 @@
+{
+  "multiblock": {
+    "pattern": [
+      ["     III     ", "     III     ", "     III     ", "             ", "             ", "III       III", "III   0   III", "III       III", "             ", "             ", "     III     ", "     III     ", "     III     "],
+      ["EEE       EEE", "EEE   B   EEE", "EEE       EEE", "             ", "     RRR     ", "    RRRRR    ", " B  RRFRR  B ", "    RRRRR    ", "     RRR     ", "             ", "EEE       EEE", "EEE   B   EEE", "EEE       EEE"],
+      ["             ", " A         A ", "             ", "             ", "             ", "             ", "      C      ", "             ", "             ", "             ", "             ", " A         A ", "             "]
+    ],
+    "mapping": {
+
+    },
+    "symmetrical": true
+  }
+}

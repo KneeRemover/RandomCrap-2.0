@@ -1,0 +1,21 @@
+{
+  "name": "Tater Tots",
+  "icon": "randomcrap:tater_tots",
+  "category": "randomcrap:goals",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "text": "Tater tots are extremely, EXTREMELY difficult to create. This is one of the final goals you should complete, possibly behind The Bucket. Creating tater tots requires one potato and one $(l:randomcrap:basic_items/animal_fat)Animal Fat$().",
+      "item": "randomcrap:tater_tots"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Place the animal fat in the empty cauldron, then right click the filled cauldron with a potato to create a tater tot. Tater tots grant Speed 3, Resistance 10, Strength 10, and Absorption 10, as well as fully restore all hunger and saturation."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Tater Factory",
+      "multiblock_id": "randomcrap:tater_cauldron"
+    }
+  ]
+}

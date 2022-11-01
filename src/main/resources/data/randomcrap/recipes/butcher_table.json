@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#&#",
+    "!#$"
+  ],
+  "key": {
+    "!": {
+      "item": "minecraft:iron_sword"
+    },
+    "$": {
+      "item": "minecraft:iron_axe"
+    },
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "&": {
+      "item": "randomcrap:compact_energised_stone"
+    }
+  },
+  "result": {
+    "item": "randomcrap:butcher_table"
+  }
+}

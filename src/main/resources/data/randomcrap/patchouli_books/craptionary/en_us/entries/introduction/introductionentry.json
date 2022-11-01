@@ -1,0 +1,11 @@
+{
+  "name": "Introduction",
+  "icon": "randomcrap:ruby",
+  "category": "randomcrap:introduction",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Welcome$(br2)Randomcrap 2.0 is a mod focused around goals.$(br)There are two ways to play mods.$(br)  1. Go through the progression and make every single item along the way$(br)  2. Find something you want and do everything necessary to get it.$(br)This mod is the second one."
+    }
+  ]
+}
