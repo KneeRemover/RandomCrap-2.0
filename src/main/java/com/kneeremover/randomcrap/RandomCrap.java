@@ -1,10 +1,12 @@
 package com.kneeremover.randomcrap;
 
+import com.kneeremover.randomcrap.gui.bucketGUI;
 import com.kneeremover.randomcrap.items.handheldWaystone;
 import com.kneeremover.randomcrap.multiblocks.kateBucket;
 import com.kneeremover.randomcrap.multiblocks.taterGenerator;
 import com.kneeremover.randomcrap.registers.blockRegister;
 import com.kneeremover.randomcrap.registers.itemRegister;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -15,10 +17,14 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ExtensionPoint;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vazkii.patchouli.api.PatchouliAPI;
@@ -26,12 +32,14 @@ import vazkii.patchouli.api.PatchouliAPI;
 import static com.kneeremover.randomcrap.multiblocks.kateBucket.BUCKET_UPGRADER;
 import static com.kneeremover.randomcrap.multiblocks.taterGenerator.TATER_CAULDRON;
 import static com.kneeremover.randomcrap.util.crapLib.append;
+import static com.kneeremover.randomcrap.util.crapLib.modid;
 
 
-@Mod("randomcrap")
+@Mod(modid)
 public class RandomCrap {
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final String modid = "randomcrap";
+    public static final String NAME = "Bucket Summoning";
+    public static Item[] tools;
 
     public RandomCrap() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -47,6 +55,14 @@ public class RandomCrap {
     private void setup(final FMLCommonSetupEvent event) {
         PatchouliAPI.get().registerMultiblock(append("tater_cauldron"), TATER_CAULDRON.get());
         PatchouliAPI.get().registerMultiblock(append("kate_bucket"), BUCKET_UPGRADER.get());
+    }
+
+    private void serverSetup(final FMLServerAboutToStartEvent event) {
+        for (Item item : ForgeRegistries.ITEMS.getValues()) {
+            if (!item.getToolTypes(item.getItem().getDefaultInstance()).isEmpty()) {
+                tools[tools.length + 1] = item;
+            }
+        }
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
