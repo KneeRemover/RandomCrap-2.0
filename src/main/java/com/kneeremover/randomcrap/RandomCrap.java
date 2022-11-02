@@ -25,7 +25,7 @@ import vazkii.patchouli.api.PatchouliAPI;
 
 import static com.kneeremover.randomcrap.multiblocks.kateBucket.BUCKET_UPGRADER;
 import static com.kneeremover.randomcrap.multiblocks.taterGenerator.TATER_CAULDRON;
-import static com.kneeremover.randomcrap.util.locationLib.append;
+import static com.kneeremover.randomcrap.util.crapLib.append;
 
 
 @Mod("randomcrap")
