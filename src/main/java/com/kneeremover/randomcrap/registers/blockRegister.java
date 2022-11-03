@@ -5,13 +5,9 @@ import com.kneeremover.randomcrap.blocks.butcherTable;
 import com.kneeremover.randomcrap.blocks.oilCauldron;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.dispenser.IPosition;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -20,11 +16,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
+import static com.kneeremover.randomcrap.util.crapLib.modid;
+
 public class blockRegister {
     //static AbstractBlock.IPositionPredicate returnFalse = (p_test_1_, p_test_2_, p_test_3_) -> false;
 
     public static final DeferredRegister<Block> BLOCKS
-            = DeferredRegister.create(ForgeRegistries.BLOCKS, RandomCrap.modid);
+            = DeferredRegister.create(ForgeRegistries.BLOCKS, modid);
 
     public static final RegistryObject<Block> RUBY_BLOCK = registerBlock("ruby_block",
             () -> new Block(AbstractBlock.Properties.create(Material.IRON)

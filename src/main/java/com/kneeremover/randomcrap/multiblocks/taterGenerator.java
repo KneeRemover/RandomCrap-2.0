@@ -1,7 +1,6 @@
 package com.kneeremover.randomcrap.multiblocks;
 
 import com.google.common.base.Suppliers;
-import com.kneeremover.randomcrap.RandomCrap;
 import com.kneeremover.randomcrap.registers.blockRegister;
 import com.kneeremover.randomcrap.util.tags;
 import net.minecraft.block.Blocks;
@@ -12,7 +11,6 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.fml.common.Mod;
 import vazkii.patchouli.api.IMultiblock;
 import vazkii.patchouli.api.PatchouliAPI;
 
@@ -20,7 +18,6 @@ import java.util.function.Supplier;
 
 import static net.minecraft.util.Hand.MAIN_HAND;
 
-@Mod.EventBusSubscriber(modid = RandomCrap.modid)
 public class taterGenerator {
     public static final Supplier<IMultiblock> TATER_CAULDRON = Suppliers.memoize(() -> {
         return PatchouliAPI.get().makeMultiblock(

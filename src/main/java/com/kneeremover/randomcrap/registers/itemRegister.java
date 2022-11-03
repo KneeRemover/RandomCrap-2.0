@@ -3,6 +3,7 @@ package com.kneeremover.randomcrap.registers;
 import com.kneeremover.randomcrap.RandomCrap;
 import com.kneeremover.randomcrap.items.animalFat;
 import com.kneeremover.randomcrap.items.handheldWaystone;
+import com.kneeremover.randomcrap.items.kateBucket.item;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
@@ -13,12 +14,14 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import static com.kneeremover.randomcrap.util.crapLib.modid;
+
 
 public class itemRegister {
 
 
     public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, RandomCrap.modid);
+            DeferredRegister.create(ForgeRegistries.ITEMS, modid);
 
 
     public static final RegistryObject<Item> ENERGISED_STONE = ITEMS.register("energised_stone",
@@ -41,6 +44,9 @@ public class itemRegister {
 
     public static final RegistryObject<Item> ANIMAL_FAT = ITEMS.register("animal_fat",
             () -> new animalFat(new Item.Properties().group(RandomCrap.TAB)));
+
+    public static final RegistryObject<Item> KATE_BUCKET = ITEMS.register("kate_bucket",
+            () -> new item(new Item.Properties().group(RandomCrap.TAB)));
 
     public static final RegistryObject<Item> TATER_TOTS = ITEMS.register("tater_tots",
             () -> new Item(new Item.Properties().group(RandomCrap.TAB).food(new Food.Builder().hunger(20).fastToEat().saturation(20)

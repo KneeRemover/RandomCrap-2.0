@@ -1,12 +1,13 @@
 package com.kneeremover.randomcrap.world;
 
-import com.kneeremover.randomcrap.RandomCrap;
 import com.kneeremover.randomcrap.world.gen.ModOreGeneration;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = RandomCrap.modid)
+import static com.kneeremover.randomcrap.util.crapLib.modid;
+
+@Mod.EventBusSubscriber(modid = modid)
 public class ModWorldEvents {
 
     @SubscribeEvent

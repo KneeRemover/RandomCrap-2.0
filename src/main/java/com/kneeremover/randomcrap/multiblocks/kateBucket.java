@@ -1,10 +1,11 @@
 package com.kneeremover.randomcrap.multiblocks;
 
 import com.google.common.base.Suppliers;
-import com.kneeremover.randomcrap.RandomCrap;
 import com.kneeremover.randomcrap.registers.blockRegister;
-import com.kneeremover.randomcrap.util.tags;
+import com.kneeremover.randomcrap.registers.itemRegister;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -18,9 +19,10 @@ import vazkii.patchouli.api.PatchouliAPI;
 
 import java.util.function.Supplier;
 
+import static com.kneeremover.randomcrap.util.crapLib.*;
 import static net.minecraft.util.Hand.MAIN_HAND;
 
-@Mod.EventBusSubscriber(modid = RandomCrap.modid)
+@Mod.EventBusSubscriber(modid = modid)
 public class kateBucket {
     public static final Supplier<IMultiblock> BUCKET_UPGRADER = Suppliers.memoize(() -> {
         return PatchouliAPI.get().makeMultiblock(
@@ -79,8 +81,12 @@ public class kateBucket {
     });
 
     public static void click(PlayerInteractEvent.RightClickBlock event) {
-        if (test(event.getWorld(), event.getPos(), event.getHand())) {
+        if (test(event.getWorld(), event.getPos(), event.getHand()) && !event.getWorld().isRemote) {
             event.getPlayer().sendStatusMessage(new TranslationTextComponent("event.randomcrap.multiblock.valid"), true);
+            if (event.getPlayer().getHeldItemMainhand().getItem() == Items.BUCKET) {
+                takeOne((ServerPlayerEntity) event.getPlayer());
+                event.getPlayer().addItemStackToInventory(itemInstance(itemRegister.KATE_BUCKET));
+            }
         }
     }
 

@@ -10,7 +10,6 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.fml.common.Mod;
 
 import static com.kneeremover.randomcrap.util.crapLib.blockInstance;
 

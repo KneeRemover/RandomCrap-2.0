@@ -1,24 +1,27 @@
 package com.kneeremover.randomcrap;
 
-import com.kneeremover.randomcrap.gui.bucketGUI;
+
 import com.kneeremover.randomcrap.items.handheldWaystone;
+import com.kneeremover.randomcrap.items.kateBucket.screen;
+import com.kneeremover.randomcrap.items.kateBucket.startupCommon;
 import com.kneeremover.randomcrap.multiblocks.kateBucket;
 import com.kneeremover.randomcrap.multiblocks.taterGenerator;
 import com.kneeremover.randomcrap.registers.blockRegister;
 import com.kneeremover.randomcrap.registers.itemRegister;
+import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ExtensionPoint;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -29,6 +32,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vazkii.patchouli.api.PatchouliAPI;
 
+import static com.kneeremover.randomcrap.items.kateBucket.startupCommon.registerItems;
 import static com.kneeremover.randomcrap.multiblocks.kateBucket.BUCKET_UPGRADER;
 import static com.kneeremover.randomcrap.multiblocks.taterGenerator.TATER_CAULDRON;
 import static com.kneeremover.randomcrap.util.crapLib.append;
@@ -66,6 +70,7 @@ public class RandomCrap {
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
+        ScreenManager.registerFactory(startupCommon.containerType, screen::new);
     }
 
     public static final ItemGroup TAB = new ItemGroup("crapTab") {
@@ -77,7 +82,6 @@ public class RandomCrap {
 
     @SubscribeEvent
     public void onWorldSave(WorldEvent.Save evt) {
-        //handheldWaystone.Save((World) evt.getWorld());
         handheldWaystone.dimensions = null;
     }
 
@@ -85,6 +89,14 @@ public class RandomCrap {
     public void RightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         taterGenerator.click(event);
         kateBucket.click(event);
+    }
+    @SubscribeEvent
+    public static void onItemsRegistration(final RegistryEvent.Register<Item> itemRegisterEvent) {
+        startupCommon.registerItems(itemRegisterEvent);
+    }
+    @SubscribeEvent
+    public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {
+        startupCommon.registerContainers(event);
     }
 
     @SubscribeEvent

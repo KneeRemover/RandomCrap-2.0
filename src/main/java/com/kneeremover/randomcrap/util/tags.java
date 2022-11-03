@@ -1,12 +1,13 @@
 package com.kneeremover.randomcrap.util;
 
-import com.kneeremover.randomcrap.RandomCrap;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
+
+import static com.kneeremover.randomcrap.util.crapLib.modid;
 
 public class tags {
 
@@ -16,7 +17,7 @@ public class tags {
                 createTag("tater_cauldron");
 
         private static Tags.IOptionalNamedTag<Block> createTag(String name) {
-            return BlockTags.createOptional(new ResourceLocation(RandomCrap.modid, name));
+            return BlockTags.createOptional(new ResourceLocation(modid, name));
         }
 
         private static Tags.IOptionalNamedTag<Block> createForgeTag(String name) {
@@ -29,7 +30,7 @@ public class tags {
         public static final Tags.IOptionalNamedTag<Item> AMETHYST = createForgeTag("gems/amethyst");
 
         private static Tags.IOptionalNamedTag<Item> createTag(String name) {
-            return ItemTags.createOptional(new ResourceLocation(RandomCrap.modid, name));
+            return ItemTags.createOptional(new ResourceLocation(modid, name));
         }
 
         private static Tags.IOptionalNamedTag<Item> createForgeTag(String name) {
