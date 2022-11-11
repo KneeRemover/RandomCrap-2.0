@@ -19,20 +19,24 @@ public class startupCommon
     public static item item;  // this holds the unique instance of your block
     public static ContainerType<container> containerType;
 
-    public static void registerItems(final RegistryEvent.Register<Item> itemRegisterEvent) {
+/*
+    @SubscribeEvent
+    public static void onItemsRegistration(final RegistryEvent.Register<Item> itemRegisterEvent) {
         item = new item(new Item.Properties().group(RandomCrap.TAB));
-        item.setRegistryName("mbe32_flower_bag_registry_name");
+        item.setRegistryName("katebucket_registry_name");
         itemRegisterEvent.getRegistry().register(item);
     }
+*/
 
     @SubscribeEvent
     public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
         // not actually required for this example....
     }
 
+    @SubscribeEvent
     public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {
         containerType = IForgeContainerType.create(container::createContainerClientSide);
-        containerType.setRegistryName("mbe32_container_registry_name");
+        containerType.setRegistryName("katebucket_registry_name");
         event.getRegistry().register(containerType);
     }
 }

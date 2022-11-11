@@ -32,7 +32,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vazkii.patchouli.api.PatchouliAPI;
 
-import static com.kneeremover.randomcrap.items.kateBucket.startupCommon.registerItems;
 import static com.kneeremover.randomcrap.multiblocks.kateBucket.BUCKET_UPGRADER;
 import static com.kneeremover.randomcrap.multiblocks.taterGenerator.TATER_CAULDRON;
 import static com.kneeremover.randomcrap.util.crapLib.append;
@@ -52,7 +51,7 @@ public class RandomCrap {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         blockRegister.register(eventBus);
         itemRegister.register(eventBus);
-
+        eventBus.register(startupCommon.class);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -89,10 +88,6 @@ public class RandomCrap {
     public void RightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         taterGenerator.click(event);
         kateBucket.click(event);
-    }
-    @SubscribeEvent
-    public static void onItemsRegistration(final RegistryEvent.Register<Item> itemRegisterEvent) {
-        startupCommon.registerItems(itemRegisterEvent);
     }
     @SubscribeEvent
     public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {

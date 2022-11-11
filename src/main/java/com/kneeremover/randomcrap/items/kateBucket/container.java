@@ -60,7 +60,6 @@ public class container extends Container {
 
     private final itemStackHandler itemStackHandler;
     private final ItemStack itemStackBeingHeld;
-
     // must assign a slot number to each of the slots used by the GUI.
     // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
     // Each time we add a Slot to the container, it automatically increases the slotIndex, which means

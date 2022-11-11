@@ -36,9 +36,9 @@ public class screen extends ContainerScreen<com.kneeremover.randomcrap.items.kat
         final float PLAYER_LABEL_DISTANCE_FROM_BOTTOM = (96 - 2);
 
         final float BAG_LABEL_YPOS = 6;
-        TranslationTextComponent bagLabel = new TranslationTextComponent(startupCommon.item.getTranslationKey());
-        float BAG_LABEL_XPOS = (xSize / 2.0F) - this.font.getStringWidth(bagLabel.getString()) / 2.0F;                  // centre the label
-        this.font.drawString(matrixStack, bagLabel.toString(), BAG_LABEL_XPOS, BAG_LABEL_YPOS, Color.darkGray.getRGB());            //this.font.drawString;
+        TranslationTextComponent redBucket = new TranslationTextComponent("Red Bucket");
+        float BAG_LABEL_XPOS = (xSize / 2.0F) - this.font.getStringWidth(redBucket.getString()) / 2.0F;                  // centre the label
+        this.font.drawString(matrixStack, redBucket.toString(), BAG_LABEL_XPOS, BAG_LABEL_YPOS, Color.darkGray.getRGB());            //this.font.drawString;
 
         float PLAYER_LABEL_YPOS = ySize - PLAYER_LABEL_DISTANCE_FROM_BOTTOM;
         this.font.drawString(matrixStack, this.playerInventory.getDisplayName().toString(),                              //this.font.drawString;
@@ -59,6 +59,6 @@ public class screen extends ContainerScreen<com.kneeremover.randomcrap.items.kat
     }
 
     // This is the resource location for the background image
-    private static final ResourceLocation TEXTURE = new ResourceLocation("minecraftbyexample", "textures/gui/mbe32_flower_bag_bg.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("randomcrap", "gui/katebucket");
 
 }
