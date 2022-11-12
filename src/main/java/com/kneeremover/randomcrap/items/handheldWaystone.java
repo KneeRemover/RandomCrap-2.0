@@ -2,21 +2,22 @@ package com.kneeremover.randomcrap.items;
 
 
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -26,7 +27,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-@Mod.EventBusSubscriber(modid = "randomcrap", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class handheldWaystone extends Item {
     public handheldWaystone(Properties properties) {
         super(properties);
@@ -41,24 +41,6 @@ public class handheldWaystone extends Item {
             slots = 1;
         }
         tooltip.add(new StringTextComponent("\u00A77Max slots: " + slots));
-    }
-    @SubscribeEvent
-    public void leftClickItemEvent(PlayerInteractEvent.LeftClickEmpty event) {
-        PlayerEntity player = event.getPlayer();
-        ItemStack stack = event.getItemStack();
-        CompoundNBT nbt = stack.getOrCreateTag();
-        int slot = nbt.getInt("slot");
-
-        if (stack.getItem() instanceof handheldWaystone) {
-            if (slot == nbt.getInt("maxSlots")) {
-                nbt.putInt("slot", 1);
-                stack.write(nbt);
-            } else {
-                nbt.putInt("slot", slot + 1);
-                stack.write(nbt);
-            }
-            player.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("item.randomcrap.handheldWaystone.slot").getString() + slot), true);
-        }
     }
 
     @Override
@@ -108,6 +90,24 @@ public class handheldWaystone extends Item {
             }
         }
         return ActionResult.resultSuccess(stack);
+    }
+
+    public static void leftClick(Entity entity, ItemStack stack) {
+        if (!entity.getEntityWorld().isRemote) {
+            CompoundNBT nbt = stack.getOrCreateTag();
+            int slot = nbt.getInt("slot");
+
+            if (stack.getItem() instanceof handheldWaystone) {
+                if (slot == nbt.getInt("maxSlots")) {
+                    nbt.putInt("slot", 1);
+                    stack.write(nbt);
+                } else {
+                    nbt.putInt("slot", slot + 1);
+                    stack.write(nbt);
+                }
+                ((PlayerEntity) entity).sendStatusMessage(new StringTextComponent(new TranslationTextComponent("item.randomcrap.handheldWaystone.slot").getString() + slot), true);
+            }
+        }
     }
 }
 

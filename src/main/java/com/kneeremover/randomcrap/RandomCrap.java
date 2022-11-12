@@ -8,12 +8,15 @@ import com.kneeremover.randomcrap.multiblocks.kateBucket;
 import com.kneeremover.randomcrap.multiblocks.taterGenerator;
 import com.kneeremover.randomcrap.registers.blockRegister;
 import com.kneeremover.randomcrap.registers.itemRegister;
+import com.kneeremover.randomcrap.util.network.main;
+import com.kneeremover.randomcrap.util.network.message.leftClick;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ActionResult;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -25,7 +28,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
@@ -45,7 +47,6 @@ import static com.kneeremover.randomcrap.util.crapLib.modid;
 @Mod(modid)
 public class RandomCrap {
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final String NAME = "Bucket Summoning";
     public static final List<Item> tools = new ArrayList<>();
 
     public RandomCrap() {
@@ -63,7 +64,7 @@ public class RandomCrap {
     private void setup(final FMLCommonSetupEvent event) {
         PatchouliAPI.get().registerMultiblock(append("tater_cauldron"), TATER_CAULDRON.get());
         PatchouliAPI.get().registerMultiblock(append("kate_bucket"), BUCKET_UPGRADER.get());
-
+        main.init();
         for (Item item : ForgeRegistries.ITEMS.getValues()) {
             if (!item.getToolTypes(item.getItem().getDefaultInstance()).isEmpty()) {
                 tools.add(item);
@@ -91,6 +92,13 @@ public class RandomCrap {
     public void RightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         taterGenerator.click(event);
         kateBucket.click(event);
+    }
+    @SubscribeEvent
+    public ActionResult<ItemStack> leftClick(PlayerInteractEvent.LeftClickEmpty event) {
+        if (event.getItemStack().getItem() instanceof handheldWaystone) {
+            main.CHANNEL.sendToServer(new leftClick(event.getItemStack()));
+        }
+        return ActionResult.resultSuccess(event.getItemStack());
     }
     @SubscribeEvent
     public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {
