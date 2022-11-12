@@ -6,7 +6,7 @@
 		"south": "randomcrap:block/bucket_station_front",
 		"east": "randomcrap:block/bucket_station_side",
 		"west": "randomcrap:block/bucket_station_side",
-		"up": "randomcrap:block/bucket_top",
+		"up": "randomcrap:block/bucket_station_top",
 		"down": "randomcrap:block/bucket_bottom"
 	}
 }

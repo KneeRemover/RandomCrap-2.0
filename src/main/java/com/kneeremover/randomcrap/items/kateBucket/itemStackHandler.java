@@ -1,13 +1,13 @@
 package com.kneeremover.randomcrap.items.kateBucket;
 
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
+
+import static com.kneeremover.randomcrap.RandomCrap.tools;
 
 /**
  * Created by TGG on 7/06/2020.
@@ -17,25 +17,23 @@ import javax.annotation.Nonnull;
  */
 public class itemStackHandler extends ItemStackHandler {
 
-    public static final int MIN_FLOWER_SLOTS = 1;
-    public static final int MAX_FLOWER_SLOTS = 16;
+    public static final int MIN_SLOTS = 1;
+    public static final int MAX_SLOTS = 54;
 
     public itemStackHandler(int numberOfSlots) {
-        super(MathHelper.clamp(numberOfSlots, MIN_FLOWER_SLOTS, MAX_FLOWER_SLOTS));
-        if (numberOfSlots < MIN_FLOWER_SLOTS || numberOfSlots > MAX_FLOWER_SLOTS) {
-            throw new IllegalArgumentException("Invalid number of flower slots:"+numberOfSlots);
+        super(MathHelper.clamp(numberOfSlots, MIN_SLOTS, MAX_SLOTS));
+        if (numberOfSlots < MIN_SLOTS || numberOfSlots > MAX_SLOTS) {
+            throw new IllegalArgumentException("Invalid number of slots:"+numberOfSlots);
         }
     }
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-        if (slot < 0 || slot >= MAX_FLOWER_SLOTS) {
+        if (slot < 0 || slot >= MAX_SLOTS) {
             throw new IllegalArgumentException("Invalid slot number:"+slot);
         }
         if (stack.isEmpty()) return false;
-        Item item = stack.getItem();
-        if (item.isIn(ItemTags.SMALL_FLOWERS) || item.isIn(ItemTags.TALL_FLOWERS)) return true;
-        return false;
+        return tools.contains(stack.getItem());
     }
 
     /**Count how many empty slots are in the bag

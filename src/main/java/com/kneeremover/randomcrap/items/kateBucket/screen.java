@@ -35,13 +35,13 @@ public class screen extends ContainerScreen<com.kneeremover.randomcrap.items.kat
         final float PLAYER_LABEL_XPOS = 8;
         final float PLAYER_LABEL_DISTANCE_FROM_BOTTOM = (96 - 2);
 
-        final float BAG_LABEL_YPOS = 6;
-        TranslationTextComponent redBucket = new TranslationTextComponent("Red Bucket");
-        float BAG_LABEL_XPOS = (xSize / 2.0F) - this.font.getStringWidth(redBucket.getString()) / 2.0F;                  // centre the label
-        this.font.drawString(matrixStack, redBucket.toString(), BAG_LABEL_XPOS, BAG_LABEL_YPOS, Color.darkGray.getRGB());            //this.font.drawString;
+        final float BUCKET_LABEL_YPOS = -50;
+        TranslationTextComponent redBucket = new TranslationTextComponent("randomcrap.gui.katebucket");
+        float BUCKET_LABEL_XPOS = 8;                  // centre the label
+        this.font.drawString(matrixStack, redBucket.getString(), BUCKET_LABEL_XPOS, BUCKET_LABEL_YPOS, Color.darkGray.getRGB());            //this.font.drawString;
 
         float PLAYER_LABEL_YPOS = ySize - PLAYER_LABEL_DISTANCE_FROM_BOTTOM;
-        this.font.drawString(matrixStack, this.playerInventory.getDisplayName().toString(),                              //this.font.drawString;
+        this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getString(),                              //this.font.drawString;
                 PLAYER_LABEL_XPOS, PLAYER_LABEL_YPOS, Color.darkGray.getRGB());
     }
 
@@ -50,15 +50,15 @@ public class screen extends ContainerScreen<com.kneeremover.randomcrap.items.kat
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(TEXTURE);                //this.minecraft
         // width and height are the size provided to the window when initialised after creation.
-        // xSize, ySize are the expected size of the texture-? usually seems to be left as a default.
+        // xSize, ySize are the expected size of the texture-? usually seems to be left as a defaul.t.
         // The code below is typical for vanilla containers, so I've just copied that- it appears to centre the texture within
         //  the available window
-        int edgeSpacingX = (this.width - this.xSize) / 2;
-        int edgeSpacingY = (this.height - this.ySize) / 2;
-        this.blit(matrixStack, edgeSpacingX, edgeSpacingY, 0, 0, this.xSize, this.ySize);
+        int edgeSpacingX = (this.width - 176) / 2;
+        int edgeSpacingY = (this.height - 279) / 2;
+        this.blit(matrixStack, edgeSpacingX, edgeSpacingY, 0, 0, 256, 256);
     }
 
     // This is the resource location for the background image
-    private static final ResourceLocation TEXTURE = new ResourceLocation("randomcrap", "gui/katebucket");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("randomcrap", "textures/gui/katebucket.png");
 
 }

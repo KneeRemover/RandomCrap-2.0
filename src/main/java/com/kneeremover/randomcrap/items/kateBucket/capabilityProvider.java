@@ -77,12 +77,12 @@ public class capabilityProvider implements ICapabilitySerializable<INBT> {
      */
     private IItemHandler getCachedInventory() {
         if (ItemStackHandler == null) {
-            ItemStackHandler = new itemStackHandler(MAX_NUMBER_OF_FLOWERS_IN_BAG);
+            ItemStackHandler = new itemStackHandler(MAX_NUMBER_ITEMS);
         }
         return ItemStackHandler;
     }
 
-    private static final int MAX_NUMBER_OF_FLOWERS_IN_BAG = 16;
+    private static final int MAX_NUMBER_ITEMS = 54;
 
     private itemStackHandler ItemStackHandler;  // initially null until our first call to getCachedInventory
 

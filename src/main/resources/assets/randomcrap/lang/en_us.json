@@ -18,5 +18,6 @@
   "event.randomcrap.multiblock.valid": "Structure valid!",
   "itemGroup.crapTab": "RandomCrap 2.0",
   "kneeremover.handheldWaystone.error.unsetPos": "No position has been set!",
-  "kneeremover.handheldWaystone.setPos": "Position set!"
+  "kneeremover.handheldWaystone.setPos": "Position set!",
+  "randomcrap.gui.katebucket": "Red Bucket"
 }

@@ -32,6 +32,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vazkii.patchouli.api.PatchouliAPI;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.kneeremover.randomcrap.multiblocks.kateBucket.BUCKET_UPGRADER;
 import static com.kneeremover.randomcrap.multiblocks.taterGenerator.TATER_CAULDRON;
 import static com.kneeremover.randomcrap.util.crapLib.append;
@@ -42,7 +46,7 @@ import static com.kneeremover.randomcrap.util.crapLib.modid;
 public class RandomCrap {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String NAME = "Bucket Summoning";
-    public static Item[] tools;
+    public static List<Item> tools = new ArrayList<Item>();
 
     public RandomCrap() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -58,14 +62,16 @@ public class RandomCrap {
     private void setup(final FMLCommonSetupEvent event) {
         PatchouliAPI.get().registerMultiblock(append("tater_cauldron"), TATER_CAULDRON.get());
         PatchouliAPI.get().registerMultiblock(append("kate_bucket"), BUCKET_UPGRADER.get());
+
+        for (Item item : ForgeRegistries.ITEMS.getValues()) {
+            if (!item.getToolTypes(item.getItem().getDefaultInstance()).isEmpty()) {
+                tools.add(item);
+            }
+        }
     }
 
     private void serverSetup(final FMLServerAboutToStartEvent event) {
-        for (Item item : ForgeRegistries.ITEMS.getValues()) {
-            if (!item.getToolTypes(item.getItem().getDefaultInstance()).isEmpty()) {
-                tools[tools.length + 1] = item;
-            }
-        }
+
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
