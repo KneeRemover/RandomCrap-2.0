@@ -18,6 +18,7 @@ import javax.annotation.Nullable;
  * is used to store flower ItemStacks.
  */
 
+@SuppressWarnings("unchecked")
 public class capabilityProvider implements ICapabilitySerializable<INBT> {
 
     private final Direction NO_SPECIFIC_SIDE = null;
@@ -34,6 +35,7 @@ public class capabilityProvider implements ICapabilitySerializable<INBT> {
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
         if (CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability)
+            //noinspection unchecked
             return (LazyOptional<T>) (lazyInitialisionSupplier);
         return LazyOptional.empty();
         //  I have written these two lines out in long hand to make it clearer what is going on, but if your Provider only has
@@ -44,24 +46,15 @@ public class capabilityProvider implements ICapabilitySerializable<INBT> {
         //   instead of returning empty.
     }
 
-    /**
-     * Write all the capability state information to NBT - in this case the contents of the inventory
-     *
-     * @return
-     */
     @Override
     public INBT serializeNBT() {
-        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.writeNBT(getCachedInventory(), NO_SPECIFIC_SIDE);
+        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.writeNBT(getCachedInventory(), null);
     }
 
-    /**
-     * Read the capability state information out of NBT - in this case the contents of the inventory.
-     *
-     * @return
-     */
+
     @Override
     public void deserializeNBT(INBT nbt) {
-        CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.readNBT(getCachedInventory(), NO_SPECIFIC_SIDE, nbt);
+        CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.readNBT(getCachedInventory(), null, nbt);
     }
 
     /**

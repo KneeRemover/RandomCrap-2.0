@@ -8,8 +8,10 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
+import java.util.Objects;
 
 // * The Screen is drawn in several layers, most importantly:
 //         * Background - renderBackground() - eg a grey fill
@@ -24,14 +26,14 @@ public class screen extends ContainerScreen<com.kneeremover.randomcrap.items.kat
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
+    protected void drawGuiContainerForegroundLayer(@NotNull MatrixStack matrixStack, int mouseX, int mouseY) {
         final float PLAYER_LABEL_XPOS = 8;
         final float PLAYER_LABEL_DISTANCE_FROM_BOTTOM = (96 - 2);
 
@@ -45,10 +47,11 @@ public class screen extends ContainerScreen<com.kneeremover.randomcrap.items.kat
                 PLAYER_LABEL_XPOS, PLAYER_LABEL_YPOS, Color.darkGray.getRGB());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void drawGuiContainerBackgroundLayer(@NotNull MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bindTexture(TEXTURE);                //this.minecraft
+        Objects.requireNonNull(this.minecraft).getTextureManager().bindTexture(TEXTURE);                //this.minecraft
         // width and height are the size provided to the window when initialised after creation.
         // xSize, ySize are the expected size of the texture-? usually seems to be left as a defaul.t.
         // The code below is typical for vanilla containers, so I've just copied that- it appears to centre the texture within

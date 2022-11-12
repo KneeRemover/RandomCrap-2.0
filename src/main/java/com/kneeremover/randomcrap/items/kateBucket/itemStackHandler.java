@@ -11,7 +11,7 @@ import static com.kneeremover.randomcrap.RandomCrap.tools;
 
 /**
  * Created by TGG on 7/06/2020.
- *
+ * <p>
  * Used to store Flower ItemStacks.  Will only accept SMALL_FLOWERS and TALL_FLOWERS
  *
  */
@@ -65,7 +65,6 @@ public class itemStackHandler extends ItemStackHandler {
      *   We need to do this manually in order to make sure that the server sends a synchronisation packet to the client for the parent ItemStack
      *   The reason is because capability information is not stored in the ItemStack nbt tag, so vanilla does not notice when
      *   the flowerbag's capability has changed.
-     * @param slot
      */
     protected void onContentsChanged(int slot) {
         // A problem - the ItemStack and the ItemStackHandler don't know which player is holding the flower bag.  Or in fact whether

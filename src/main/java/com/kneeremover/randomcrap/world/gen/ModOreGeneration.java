@@ -11,6 +11,8 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 
+import java.util.Objects;
+
 public class ModOreGeneration {
     public static void generatoeOres(final BiomeLoadingEvent event) {
         for (OreType ore : OreType.values()) {
@@ -29,6 +31,6 @@ public class ModOreGeneration {
     }
 
     private static ConfiguredFeature<?, ?> registerOreFeature(OreType ore, OreFeatureConfig oreFeatureConfig, ConfiguredPlacement configuredPlacement) {
-        return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, ore.getBlock().get().getRegistryName(), Feature.ORE.withConfiguration(oreFeatureConfig).withPlacement(configuredPlacement).square().count(ore.getMaxVeinSize()));
+        return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, Objects.requireNonNull(Objects.requireNonNull(ore.getBlock().get().getRegistryName())), Feature.ORE.withConfiguration(oreFeatureConfig).withPlacement(configuredPlacement).square().count(ore.getMaxVeinSize()));
     }
 }

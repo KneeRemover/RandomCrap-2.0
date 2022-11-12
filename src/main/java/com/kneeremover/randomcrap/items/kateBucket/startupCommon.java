@@ -1,9 +1,7 @@
 package com.kneeremover.randomcrap.items.kateBucket;
 
 
-import com.kneeremover.randomcrap.RandomCrap;
 import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,11 +25,6 @@ public class startupCommon
         itemRegisterEvent.getRegistry().register(item);
     }
 */
-
-    @SubscribeEvent
-    public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
-        // not actually required for this example....
-    }
 
     @SubscribeEvent
     public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {

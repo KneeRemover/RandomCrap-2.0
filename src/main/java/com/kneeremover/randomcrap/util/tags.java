@@ -14,10 +14,10 @@ public class tags {
     public static class Blocks {
 
         public static final Tags.IOptionalNamedTag<Block> TATER_CAULDRON =
-                createTag("tater_cauldron");
+                createTag();
 
-        private static Tags.IOptionalNamedTag<Block> createTag(String name) {
-            return BlockTags.createOptional(new ResourceLocation(modid, name));
+        private static Tags.IOptionalNamedTag<Block> createTag() {
+            return BlockTags.createOptional(new ResourceLocation(modid, "tater_cauldron"));
         }
 
         private static Tags.IOptionalNamedTag<Block> createForgeTag(String name) {
@@ -27,14 +27,14 @@ public class tags {
 
     public static class Items {
 
-        public static final Tags.IOptionalNamedTag<Item> AMETHYST = createForgeTag("gems/amethyst");
+        public static final Tags.IOptionalNamedTag<Item> AMETHYST = createForgeTag();
 
         private static Tags.IOptionalNamedTag<Item> createTag(String name) {
             return ItemTags.createOptional(new ResourceLocation(modid, name));
         }
 
-        private static Tags.IOptionalNamedTag<Item> createForgeTag(String name) {
-            return ItemTags.createOptional(new ResourceLocation("forge", name));
+        private static Tags.IOptionalNamedTag<Item> createForgeTag() {
+            return ItemTags.createOptional(new ResourceLocation("forge", "gems/amethyst"));
         }
     }
 }

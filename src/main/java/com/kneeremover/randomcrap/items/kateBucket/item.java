@@ -1,6 +1,5 @@
 package com.kneeremover.randomcrap.items.kateBucket;
 
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -20,6 +19,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -37,46 +37,40 @@ public class item extends Item {
         );
     }
 
-    /**
-     * When the player right clicks while holding the bag, open the inventory screen
-     *
-     * @param world
-     * @param player
-     * @param hand
-     * @return the new itemstack
-     */
     @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand) {
+    public ActionResult<ItemStack> onItemRightClick(@NotNull World world, PlayerEntity player, @Nonnull Hand hand) {
         ItemStack stack = player.getHeldItem(hand);
-        int current = stack.getOrCreateTag().getInt("current");
-        if (player.isSneaking()) {
-            if (current < 3) {
-                current++;
+        if (stack.getOrCreateTag().getBoolean("used")) {
+            int current = stack.getOrCreateTag().getInt("current");
+            if (player.isSneaking()) {
+                if (current < 3) {
+                    current++;
+                } else {
+                    current = 0;
+                }
+                stack.getOrCreateTag().putInt("current", current);
             } else {
-                current = 0;
+                if (current == 0) refresh(stack, ToolType.PICKAXE, world);
+                if (current == 1) refresh(stack, ToolType.AXE, world);
+                if (current == 2) refresh(stack, ToolType.SHOVEL, world);
+                if (current == 3) refresh(stack, ToolType.HOE, world);
+
+                CompoundNBT nbt = stack.getOrCreateTag();
+                int dirtyCounter = nbt.getInt("dirtyCounter");
+                nbt.putInt("dirtyCounter", dirtyCounter + 1);
+                stack.setTag(nbt);
+
+                if (!world.isRemote) {  // server only!
+                    INamedContainerProvider containerProviderBucket = new ContainerProviderBucket(this, stack);
+                    final int NUMBER_OF_FLOWER_SLOTS = 16;
+                    NetworkHooks.openGui((ServerPlayerEntity) player,
+                            containerProviderBucket,
+                            (packetBuffer) -> packetBuffer.writeInt(NUMBER_OF_FLOWER_SLOTS));
+                }
             }
-            stack.getOrCreateTag().putInt("current", current);
         } else {
-            if (current == 0) refresh(stack, ToolType.PICKAXE, world);
-            if (current == 1) refresh(stack, ToolType.AXE, world);
-            if (current == 2) refresh(stack, ToolType.SHOVEL, world);
-            if (current == 3) refresh(stack, ToolType.HOE, world);
-
-            CompoundNBT nbt = stack.getOrCreateTag();
-            int dirtyCounter = nbt.getInt("dirtyCounter");
-            nbt.putInt("dirtyCounter", dirtyCounter + 1);
-            stack.setTag(nbt);
-
-            if (!world.isRemote) {  // server only!
-                INamedContainerProvider containerProviderBucket = new ContainerProviderBucket(this, stack);
-                final int NUMBER_OF_FLOWER_SLOTS = 16;
-                NetworkHooks.openGui((ServerPlayerEntity) player,
-                        containerProviderBucket,
-                        (packetBuffer) -> {
-                            packetBuffer.writeInt(NUMBER_OF_FLOWER_SLOTS);
-                        });
-            }
+            stack.getOrCreateTag().putBoolean("used", true);
         }
         return ActionResult.resultSuccess(stack);
     }
@@ -88,21 +82,19 @@ public class item extends Item {
         }
 
         @Override
-        public ITextComponent getDisplayName() {
+        public @NotNull ITextComponent getDisplayName() {
             return itemStackBucket.getDisplayName();
         }
 
         @Override
-        public container createMenu(int windowID, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-            container newContainerServerSide =
-                    container.createContainerServerSide(windowID, playerInventory,
-                            item.getItemStackHandler(itemStackBucket),
-                            itemStackBucket);
-            return newContainerServerSide;
+        public container createMenu(int windowID, @NotNull PlayerInventory playerInventory, @NotNull PlayerEntity playerEntity) {
+            return container.createContainerServerSide(windowID, playerInventory,
+                    getItemStackHandler(itemStackBucket),
+                    itemStackBucket);
         }
 
-        private item item;
-        private ItemStack itemStackBucket;
+        private final item item;
+        private final ItemStack itemStackBucket;
     }
 
     // ---------------- Code related to Capabilities
@@ -116,15 +108,9 @@ public class item extends Item {
         return new capabilityProvider();
     }
 
-    /**
-     * Retrieves the ItemStackHandler for this itemStack (retrieved from the Capability)
-     *
-     * @param itemStack
-     * @return
-     */
     private static itemStackHandler getItemStackHandler(ItemStack itemStack) {
-        IItemHandler itemStackHandler = itemStack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
-        if (itemStackHandler == null || !(itemStackHandler instanceof itemStackHandler)) {
+        @SuppressWarnings("ConstantConditions") IItemHandler itemStackHandler = itemStack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
+        if (!(itemStackHandler instanceof itemStackHandler)) {
             LOGGER.error("ItemBucket did not have the expected ITEM_HANDLER_CAPABILITY");
             return new itemStackHandler(1);
         }
@@ -139,7 +125,7 @@ public class item extends Item {
 
     public static void refresh(ItemStack stack, ToolType toolType, World world) {
         if (!world.isRemote) {     // Only server side, of course.
-            bucketTools = new ArrayList<Item>();    // Reset the tools container
+            bucketTools = new ArrayList<>();    // Reset the tools container
             for (Item item : tools) {           // Cycle through all the tools
                 if (item.getToolTypes(item.getItem().getDefaultInstance()).contains(toolType))
                     bucketTools.add(item);   // Match to tooltype
@@ -158,21 +144,6 @@ public class item extends Item {
         }
     }
 
-    /**
-     * Ensure that our capability is sent to the client when transmitted over the network.
-     * Not needed if you don't need the capability information on the client
-     * <p>
-     * Note that this will sometimes be applied multiple times, the following MUST
-     * be supported:
-     * Item item = stack.getItem();
-     * NBTTagCompound nbtShare1 = item.getShareTag(stack);
-     * stack.readShareTag(nbtShare1);
-     * NBTTagCompound nbtShare2 = item.getShareTag(stack);
-     * assert nbtShare1.equals(nbtShare2);
-     *
-     * @param stack The stack to send the NBT tag for
-     * @return The NBT tag
-     */
     @Nullable
     @Override
     public CompoundNBT getShareTag(ItemStack stack) {
@@ -207,24 +178,6 @@ public class item extends Item {
         itemStackHandler itemStackHandler = getItemStackHandler(stack);
         itemStackHandler.deserializeNBT(capabilityTag);
     }
-
-    // ------------ code used for changing the appearance of the bag based on the number of flowers in it
-
-    /**
-     * gets the fullness property override, used in mbe32_flower_bag_registry_name.json to select which model should
-     * be rendered
-     *
-     * @param itemStack
-     * @param world
-     * @param livingEntity
-     * @return 0.0 (empty) -> 1.0 (full) based on the number of slots in the bag which are in use
-     */
-    public static float getFullnessPropertyOverride(ItemStack itemStack, @Nullable World world, @Nullable LivingEntity livingEntity) {
-        itemStackHandler bucket = getItemStackHandler(itemStack);
-        float fractionEmpty = bucket.getNumberOfEmptySlots() / (float) bucket.getSlots();
-        return 1.0F - fractionEmpty;
-    }
-
 
     private static final Logger LOGGER = LogManager.getLogger();
 }

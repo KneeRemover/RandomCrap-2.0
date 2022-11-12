@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 import static com.kneeremover.randomcrap.util.crapLib.modid;
 
 public class blockRegister {
-    //static AbstractBlock.IPositionPredicate returnFalse = (p_test_1_, p_test_2_, p_test_3_) -> false;
+    static final AbstractBlock.IPositionPredicate returnFalse = (p_test_1_, p_test_2_, p_test_3_) -> false;
 
     public static final DeferredRegister<Block> BLOCKS
             = DeferredRegister.create(ForgeRegistries.BLOCKS, modid);
@@ -46,7 +46,7 @@ public class blockRegister {
 
     public static final RegistryObject<Block> BLUE_HOPPER = registerBlock("blue_hopper",
             () -> new Block(AbstractBlock.Properties.create(Material.IRON)
-                    .harvestLevel(2).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2f).hardnessAndResistance(2f)));
+                    .harvestLevel(2).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2f).hardnessAndResistance(2f).notSolid().setOpaque(returnFalse)));
 
     public static final RegistryObject<Block> BUCKET_UPGRADE = registerBlock("bucket_upgrade_station",
             () -> new Block(AbstractBlock.Properties.create(Material.IRON)

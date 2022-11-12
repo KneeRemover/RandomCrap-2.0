@@ -30,9 +30,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import vazkii.patchouli.api.PatchouliAPI;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +46,7 @@ import static com.kneeremover.randomcrap.util.crapLib.modid;
 public class RandomCrap {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String NAME = "Bucket Summoning";
-    public static List<Item> tools = new ArrayList<Item>();
+    public static final List<Item> tools = new ArrayList<>();
 
     public RandomCrap() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -56,6 +56,7 @@ public class RandomCrap {
         blockRegister.register(eventBus);
         itemRegister.register(eventBus);
         eventBus.register(startupCommon.class);
+        eventBus.register(handheldWaystone.class);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -70,17 +71,13 @@ public class RandomCrap {
         }
     }
 
-    private void serverSetup(final FMLServerAboutToStartEvent event) {
-
-    }
-
     private void doClientStuff(final FMLClientSetupEvent event) {
         ScreenManager.registerFactory(startupCommon.containerType, screen::new);
     }
 
     public static final ItemGroup TAB = new ItemGroup("crapTab") {
         @Override
-        public ItemStack createIcon() {
+        public @NotNull ItemStack createIcon() {
             return new ItemStack(itemRegister.RUBY.get());
         }
     };

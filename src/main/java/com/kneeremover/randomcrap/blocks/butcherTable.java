@@ -12,17 +12,19 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import static com.kneeremover.randomcrap.util.crapLib.itemInstance;
 import static com.kneeremover.randomcrap.util.crapLib.takeOne;
 
+@SuppressWarnings("deprecation")
 public class butcherTable extends Block {
     public butcherTable(Properties properties) {
         super(properties);
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public @NotNull ActionResultType onBlockActivated(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
         if (!worldIn.isRemote && player.getHeldItemMainhand().getItem() == Items.BEEF) {
                 player.addItemStackToInventory(itemRegister.ANIMAL_FAT.get().getDefaultInstance());
                 takeOne((ServerPlayerEntity) player);
@@ -31,7 +33,7 @@ public class butcherTable extends Block {
     }
 
     @Override
-    public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+    public void onBlockClicked(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player) {
         if (!worldIn.isRemote && player.getHeldItemMainhand().getItem() == Items.BEEF) {
             ItemStack animalFat = itemInstance(itemRegister.ENERGISED_STONE);
             animalFat.setCount(player.getHeldItemMainhand().getCount());

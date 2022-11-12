@@ -11,6 +11,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.items.SlotItemHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -23,26 +24,11 @@ import javax.annotation.Nonnull;
 
 public class container extends Container {
 
-    /**
-     * Creates the container to be used on the server side
-     * @param windowID
-     * @param playerInventory
-     * @param bucketContents
-     * @param Bucket the ItemStack for the  bucket; this is used for checking whether the player is still holding the bucket in their hand
-     * @return
-     */
     public static container createContainerServerSide(int windowID, PlayerInventory playerInventory, itemStackHandler bucketContents,
                                                       ItemStack Bucket) {
         return new container(windowID, playerInventory, bucketContents, Bucket);
     }
 
-    /**
-     * Creates the container to be used on the client side  (contains dummy data)
-     * @param windowID
-     * @param playerInventory
-     * @param extraData extra data sent from the server
-     * @return
-     */
     public static container createContainerClientSide(int windowID, PlayerInventory playerInventory, net.minecraft.network.PacketBuffer extraData) {
         // for this example we use extraData for the server to tell the client how many slots for  itemstacks the  bucket contains.
         int numberOfSlots = 54;
@@ -98,8 +84,7 @@ public class container extends Container {
         final int HOTBAR_YPOS = 142;
         // Add the players hotbar to the gui - the [xpos, ypos] location of each item
         for (int x = 0; x < HOTBAR_SLOT_COUNT; x++) {
-            int slotNumber = x;
-            addSlot(new Slot(playerInv, slotNumber, HOTBAR_XPOS + SLOT_X_SPACING * x, HOTBAR_YPOS));
+            addSlot(new Slot(playerInv, x, HOTBAR_XPOS + SLOT_X_SPACING * x, HOTBAR_YPOS));
         }
 
         final int PLAYER_INVENTORY_XPOS = 8;
@@ -123,12 +108,11 @@ public class container extends Container {
         final int BUCKET_INVENTORY_XPOS = 8;
         // Add the tile inventory container to the gui
         for (int bucketSlot = 0; bucketSlot < bucketSlotCount; ++bucketSlot) {
-            int slotNumber = bucketSlot;
             int bucketRow = bucketSlot / BUCKET_SLOTS_PER_ROW;
             int bucketCol = bucketSlot % BUCKET_SLOTS_PER_ROW;
             int xpos = BUCKET_INVENTORY_XPOS + SLOT_X_SPACING * bucketCol;
             int ypos = BUCKET_INVENTORY_YPOS + SLOT_Y_SPACING * bucketRow;
-            addSlot(new SlotItemHandler(itemStackHandler, slotNumber, xpos, ypos));
+            addSlot(new SlotItemHandler(itemStackHandler, bucketSlot, xpos, ypos));
         }
     }
 
@@ -153,7 +137,7 @@ public class container extends Container {
     //   otherwise, returns a copy of the source stack
     @Nonnull
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity player, int sourceSlotIndex) {
+    public ItemStack transferStackInSlot(@NotNull PlayerEntity player, int sourceSlotIndex) {
         Slot sourceSlot = inventorySlots.get(sourceSlotIndex);
         if (sourceSlot == null || !sourceSlot.getHasStack()) return ItemStack.EMPTY;  //EMPTY_ITEM
         ItemStack sourceStack = sourceSlot.getStack();
@@ -161,12 +145,12 @@ public class container extends Container {
         final int BUCKET_SLOT_COUNT = itemStackHandler.getSlots();
 
         // Check if the slot clicked is one of the vanilla container slots
-        if (sourceSlotIndex >= VANILLA_FIRST_SLOT_INDEX && sourceSlotIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
+        if (sourceSlotIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
             // This is a vanilla container slot so merge the stack into the bucket inventory
             if (!mergeItemStack(sourceStack, BUCKET_INVENTORY_FIRST_SLOT_INDEX, BUCKET_INVENTORY_FIRST_SLOT_INDEX + BUCKET_SLOT_COUNT, false)){
                 return ItemStack.EMPTY;  // EMPTY_ITEM
             }
-        } else if (sourceSlotIndex >= BUCKET_INVENTORY_FIRST_SLOT_INDEX && sourceSlotIndex < BUCKET_INVENTORY_FIRST_SLOT_INDEX + BUCKET_SLOT_COUNT) {
+        } else if (sourceSlotIndex < BUCKET_INVENTORY_FIRST_SLOT_INDEX + BUCKET_SLOT_COUNT) {
             // This is a bucket slot so merge the stack into the players inventory
             if (!mergeItemStack(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
                 return ItemStack.EMPTY;
@@ -195,7 +179,7 @@ public class container extends Container {
      * The easiest way is just to set a counter in the nbt tag and let the vanilla code notice that the itemstack has changed.
      * The side effect is that the player's hand moves down and up (because the client thinks it is a new ItemStack) but that's not objectionable.
      * Alternatively you could copy the code from vanilla detectAndSendChanges and tweak it to find the slot for itemStackBeingHeld and send it manually.
-     *
+     * <p>
      * Of course, if your ItemStack's capability doesn't affect the rendering of the ItemStack, i.e. the Capability is not needed on the client at all, then
      *   you don't need to bother with marking it dirty.
      */

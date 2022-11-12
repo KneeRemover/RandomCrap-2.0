@@ -17,7 +17,9 @@
   "item.randomcrap.compact_energised_stone": "Compact Energised Stone",
   "event.randomcrap.multiblock.valid": "Structure valid!",
   "itemGroup.crapTab": "RandomCrap 2.0",
-  "kneeremover.handheldWaystone.error.unsetPos": "No position has been set!",
-  "kneeremover.handheldWaystone.setPos": "Position set!",
-  "randomcrap.gui.katebucket": "Red Bucket"
+  "item.randomcrap.handheldWaystone.error.unsetPos": "No position has been set!",
+  "item.randomcrap.handheldWaystone.setPos": "Position set!",
+  "randomcrap.gui.katebucket": "Red Bucket",
+  "item.randomcrap.kate_bucket": "Red Bucket",
+  "item.randomcrap.handheldWaystone.slot": "Selected slot: "
 }

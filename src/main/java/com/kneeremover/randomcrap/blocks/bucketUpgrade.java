@@ -12,6 +12,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import static com.kneeremover.randomcrap.util.crapLib.itemInstance;
 import static com.kneeremover.randomcrap.util.crapLib.takeOne;
@@ -21,8 +22,9 @@ public class bucketUpgrade extends Block {
         super(properties);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public @NotNull ActionResultType onBlockActivated(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
         if (!worldIn.isRemote && player.getHeldItemMainhand().getItem() == Items.BUCKET && kateBucket.test(worldIn, pos, handIn)) {
                 player.addItemStackToInventory(itemInstance(itemRegister.ENERGISED_STONE));
                 takeOne((ServerPlayerEntity) player);

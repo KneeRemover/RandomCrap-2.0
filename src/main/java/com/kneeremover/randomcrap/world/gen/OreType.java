@@ -6,7 +6,7 @@ import net.minecraftforge.common.util.Lazy;
 
 public enum OreType {
 
-    RUBY(Lazy.of(blockRegister.RUBY_ORE), 4, 1, 30);
+    RUBY(Lazy.of(blockRegister.RUBY_ORE));
 
 
     private final Lazy<Block> block;
@@ -14,11 +14,11 @@ public enum OreType {
     private final int minHeight;
     private final int maxHeight;
 
-    OreType(Lazy<Block> block, int maxVeinSize, int minHeight, int maxHeight) {
+    OreType(Lazy<Block> block) {
         this.block = block;
-        this.maxVeinSize = maxVeinSize;
-        this.minHeight = minHeight;
-        this.maxHeight = maxHeight;
+        this.maxVeinSize = 4;
+        this.minHeight = 1;
+        this.maxHeight = 30;
     }
 
     public Lazy<Block> getBlock() {
