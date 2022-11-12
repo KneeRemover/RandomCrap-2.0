@@ -1,8 +1,10 @@
 package com.kneeremover.randomcrap.items;
 
 
+import com.kneeremover.randomcrap.registers.itemRegister;
+import com.kneeremover.randomcrap.util.network.main;
+import com.kneeremover.randomcrap.util.network.message.leftClick;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
@@ -18,6 +20,11 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -33,6 +40,10 @@ public class handheldWaystone extends Item {
     }
 
     public static HashMap<RegistryKey<World>, ServerWorld> dimensions = new HashMap<>();
+    @SubscribeEvent
+    public static void onWorldSave(WorldEvent.Save evt) {
+        dimensions = null;
+    }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
@@ -41,6 +52,14 @@ public class handheldWaystone extends Item {
             slots = 1;
         }
         tooltip.add(new StringTextComponent("\u00A77Max slots: " + slots));
+    }
+
+    @SubscribeEvent
+    public static ActionResult<ItemStack> leftClick(PlayerInteractEvent.LeftClickEmpty event) {
+        if (event.getItemStack().getItem() instanceof handheldWaystone) {
+            main.CHANNEL.sendToServer(new leftClick(event.getItemStack()));
+        }
+        return ActionResult.resultSuccess(event.getItemStack());
     }
 
     @Override
@@ -92,21 +111,21 @@ public class handheldWaystone extends Item {
         return ActionResult.resultSuccess(stack);
     }
 
-    public static void leftClick(Entity entity, ItemStack stack) {
-        if (!entity.getEntityWorld().isRemote) {
-            CompoundNBT nbt = stack.getOrCreateTag();
-            int slot = nbt.getInt("slot");
-
-            if (stack.getItem() instanceof handheldWaystone) {
-                if (slot == nbt.getInt("maxSlots")) {
-                    nbt.putInt("slot", 1);
-                    stack.write(nbt);
-                } else {
-                    nbt.putInt("slot", slot + 1);
-                    stack.write(nbt);
-                }
-                ((PlayerEntity) entity).sendStatusMessage(new StringTextComponent(new TranslationTextComponent("item.randomcrap.handheldWaystone.slot").getString() + slot), true);
+    @SubscribeEvent
+    public static void AnvilUpdateEvent(AnvilUpdateEvent evt) {
+        if (evt.getLeft().getItem() instanceof handheldWaystone && evt.getRight().getItem() == itemRegister.SIGIL.get()) {
+            ItemStack input = evt.getLeft();
+            ItemStack mod = evt.getRight();
+            ItemStack output = input.copy();
+            CompoundNBT nbt = output.getOrCreateTag();
+            if (nbt.getInt("maxSlots") == 0) {
+                nbt.putInt("maxSlots", 1 + mod.getCount());
+            } else {
+                nbt.putInt("maxSlots", nbt.getInt("maxSlots") + mod.getCount());
             }
+            evt.setOutput(output);
+            evt.setCost(1);
+            evt.setResult(Event.Result.ALLOW);
         }
     }
 }

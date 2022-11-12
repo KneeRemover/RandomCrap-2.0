@@ -11,6 +11,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vazkii.patchouli.api.IMultiblock;
 import vazkii.patchouli.api.PatchouliAPI;
 
@@ -83,7 +84,8 @@ public class taterGenerator {
             })
     ));
 
-    public static void click(PlayerInteractEvent.RightClickBlock event) {
+    @SubscribeEvent
+    public static void clickcauldron(PlayerInteractEvent.RightClickBlock event) {
         if (test(event.getWorld(), event.getPos(), event.getHand())) {
             event.getPlayer().sendStatusMessage(new TranslationTextComponent("event.randomcrap.multiblock.valid"), true);
         }

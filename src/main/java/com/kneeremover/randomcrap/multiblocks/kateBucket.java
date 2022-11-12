@@ -13,6 +13,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vazkii.patchouli.api.IMultiblock;
 import vazkii.patchouli.api.PatchouliAPI;
@@ -78,7 +79,8 @@ public class kateBucket {
             'B', blockRegister.BLUE_HOPPER.get()
     ));
 
-    public static void click(PlayerInteractEvent.RightClickBlock event) {
+    @SubscribeEvent
+    public static void clickbucket(PlayerInteractEvent.RightClickBlock event) {
         if (test(event.getWorld(), event.getPos(), event.getHand()) && !event.getWorld().isRemote) {
             event.getPlayer().sendStatusMessage(new TranslationTextComponent("event.randomcrap.multiblock.valid"), true);
             if (event.getPlayer().getHeldItemMainhand().getItem() == Items.BUCKET) {

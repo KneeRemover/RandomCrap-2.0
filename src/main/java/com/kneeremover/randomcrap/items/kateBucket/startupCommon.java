@@ -5,7 +5,6 @@ import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 /**
  *
@@ -16,15 +15,6 @@ public class startupCommon
 {
     public static item item;  // this holds the unique instance of your block
     public static ContainerType<container> containerType;
-
-/*
-    @SubscribeEvent
-    public static void onItemsRegistration(final RegistryEvent.Register<Item> itemRegisterEvent) {
-        item = new item(new Item.Properties().group(RandomCrap.TAB));
-        item.setRegistryName("katebucket_registry_name");
-        itemRegisterEvent.getRegistry().register(item);
-    }
-*/
 
     @SubscribeEvent
     public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {
