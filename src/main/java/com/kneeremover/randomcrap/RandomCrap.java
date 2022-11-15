@@ -4,6 +4,7 @@ package com.kneeremover.randomcrap;
 import com.kneeremover.randomcrap.items.handheldWaystone;
 import com.kneeremover.randomcrap.items.kateBucket.screen;
 import com.kneeremover.randomcrap.items.kateBucket.startupCommon;
+import com.kneeremover.randomcrap.items.rocket;
 import com.kneeremover.randomcrap.multiblocks.kateBucket;
 import com.kneeremover.randomcrap.multiblocks.taterGenerator;
 import com.kneeremover.randomcrap.registers.blockRegister;
@@ -28,6 +29,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import vazkii.patchouli.api.PatchouliAPI;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +58,8 @@ public class RandomCrap {
         forgeEventBus.addListener(handheldWaystone::AnvilUpdateEvent);
         forgeEventBus.addListener(kateBucket::clickbucket);
         forgeEventBus.addListener(taterGenerator::clickcauldron);
+        forgeEventBus.addListener(rocket::tick);
+
         //    Class Registries
         forgeEventBus.register(this);
 
@@ -91,5 +95,9 @@ public class RandomCrap {
     @SubscribeEvent
     public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {
         startupCommon.registerContainers(event);
+    }
+
+    public Method test(Method method) {
+        return method;
     }
 }

@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "text": "This item is a pain to craft, but it is very powerful. Sneak right clicking on a block will save your current position. (The first time after crafting, click twice). This item can be upgraded in an anvil to allow more save slots, which you can switch between by holding the waystone in your offhand and right clicking a block.",
+      "text": "This item is a pain to craft, but it is very powerful. Sneak right clicking will save your current position. (The first time after crafting, click twice). This item can be upgraded in an anvil to allow more save slots, which you can switch between by left clicking.",
       "item": "randomcrap:handheld_waystone"
     },
     {

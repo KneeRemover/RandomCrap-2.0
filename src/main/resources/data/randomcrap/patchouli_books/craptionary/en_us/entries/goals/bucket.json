@@ -1,11 +1,11 @@
 {
-  "name": "The Bucket",
-  "icon": "minecraft:bucket",
+  "name": "Red Bucket",
+  "icon": "randomcrap:kate_bucket",
   "category": "randomcrap:goals",
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "text": "As we all know, red buckets contain every possible tool. Thats why this item exists! With this bucket, you can summon any netherite tool. This tool will be overenchanted. For example, if you summon a pickaxe, it will summon a netherite pickaxe enchanted with Fortune X and Efficiency X. This item can also summon tools added by this mod! (support for other mods coming soon or never)",
+      "text": "As we all know, red buckets contain every possible tool. Thats why this item exists! With this bucket, you can summon any tool, from any mod, as long as it uses the forge ToolType system. Sneak + Right Click to switch between modes.",
       "item": "minecraft:bucket"
     },
     {

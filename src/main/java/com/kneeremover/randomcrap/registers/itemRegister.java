@@ -2,8 +2,10 @@ package com.kneeremover.randomcrap.registers;
 
 import com.kneeremover.randomcrap.RandomCrap;
 import com.kneeremover.randomcrap.items.animalFat;
+import com.kneeremover.randomcrap.items.clock;
 import com.kneeremover.randomcrap.items.handheldWaystone;
 import com.kneeremover.randomcrap.items.kateBucket.item;
+import com.kneeremover.randomcrap.items.rocket;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
@@ -42,8 +44,14 @@ public class itemRegister {
     public static final RegistryObject<Item> HANDHELD_WAYSTONE = ITEMS.register("handheld_waystone",
             () -> new handheldWaystone(new Item.Properties().group(RandomCrap.TAB)));
 
+    public static final RegistryObject<Item> ROCKET_SHIP = ITEMS.register("rocket_ship",
+            () -> new rocket(new Item.Properties().group(RandomCrap.TAB)));
+
     public static final RegistryObject<Item> ANIMAL_FAT = ITEMS.register("animal_fat",
             () -> new animalFat(new Item.Properties().group(RandomCrap.TAB)));
+
+    public static final RegistryObject<Item> STOPWATCH = ITEMS.register("stopwatch",
+            () -> new clock(new Item.Properties().group(RandomCrap.TAB)));
 
     public static final RegistryObject<Item> KATE_BUCKET = ITEMS.register("kate_bucket",
             () -> new item(new Item.Properties().group(RandomCrap.TAB)));

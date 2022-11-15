@@ -1,0 +1,16 @@
+{
+  "name": "Bucket Upgrade Station",
+  "icon": "randomcrap:bucket_upgrade_station",
+  "category": "randomcrap:blocks",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Upgrades buckets. Right click with a bucket to upgrade"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:bucket_upgrade_station",
+      "text": "Crafting the bucket upgrade station"
+    }
+  ]
+}

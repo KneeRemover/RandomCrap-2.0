@@ -1,0 +1,16 @@
+{
+  "name": "Blue Hopper",
+  "icon": "randomcrap:blue_hopper",
+  "category": "randomcrap:blocks",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Legends say it has a 4 year long animation, after which you gain time powers"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:blue_hopper",
+      "text": "Crafting the blue hopper"
+    }
+  ]
+}

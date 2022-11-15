@@ -34,12 +34,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static com.kneeremover.randomcrap.RandomCrap.LOGGER;
+
 public class handheldWaystone extends Item {
     public handheldWaystone(Properties properties) {
         super(properties);
     }
 
     public static HashMap<RegistryKey<World>, ServerWorld> dimensions = new HashMap<>();
+
     @SubscribeEvent
     public static void onWorldSave(WorldEvent.Save evt) {
         dimensions = null;
@@ -57,13 +60,45 @@ public class handheldWaystone extends Item {
     @SubscribeEvent
     public static ActionResult<ItemStack> leftClick(PlayerInteractEvent.LeftClickEmpty event) {
         if (event.getItemStack().getItem() instanceof handheldWaystone) {
-            main.CHANNEL.sendToServer(new leftClick(event.getItemStack()));
+            main.CHANNEL.sendToServer(new leftClick());
         }
         return ActionResult.resultSuccess(event.getItemStack());
     }
 
+    public static void leftClickPacket(ItemStack stack, ServerPlayerEntity player) {
+        if (stack.getItem() instanceof handheldWaystone && player.getCooldownTracker().getCooldown(itemRegister.HANDHELD_WAYSTONE.get(), 1) == 0) {
+            player.getCooldownTracker().setCooldown(itemRegister.HANDHELD_WAYSTONE.get(), 20);
+            CompoundNBT nbt = stack.getOrCreateTag();
+            int slot = nbt.getInt("slot");
+
+            if (slot == 0) {
+                slot = 1;
+                nbt.putInt("slot", 1);
+            }
+            if (nbt.getInt("maxSlots") == 0) {
+                nbt.putInt("maxSlots", 1);
+            }
+            stack.write(nbt); // if 0 make 1
+
+            if (slot >= nbt.getInt("maxSlots")) {
+                LOGGER.info("Looping around because slot is " + slot + " and maxSlots is " + nbt.getInt("maxSlots"));
+                slot = 1;
+                nbt.putInt("slot", 1);
+            } else {
+                LOGGER.info("Incrementing slots from " + slot + " to " + (slot + 1));
+                slot++;
+                nbt.putInt("slot", slot);
+            }
+            stack.write(nbt);
+            assert player != null;
+            ((PlayerEntity) player).sendStatusMessage(new StringTextComponent(new TranslationTextComponent("item.randomcrap.handheldWaystone.slot").getString() + slot), true);
+            player.setHeldItem(Hand.MAIN_HAND, stack);
+        }
+    }
+
     @Override
-    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World world, PlayerEntity player, @Nonnull Hand hand) {
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World world, PlayerEntity
+            player, @Nonnull Hand hand) {
         ItemStack stack = player.getHeldItem(hand);
         CompoundNBT nbt = stack.getOrCreateTag();
         int slot = nbt.getInt("slot");

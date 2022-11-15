@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "$B$",
+    "#$#",
+    "$#$"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "$": {
+      "item": "randomcrap:energised_stone_block"
+    },
+    "#": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "randomcrap:bucket_upgrade_station"
+  }
+}
