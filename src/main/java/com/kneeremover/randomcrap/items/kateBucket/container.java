@@ -1,6 +1,7 @@
 package com.kneeremover.randomcrap.items.kateBucket;
 
 
+import com.kneeremover.randomcrap.registers.containerRegister;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -75,7 +76,7 @@ public class container extends Container {
     private container(int windowId, PlayerInventory playerInv,
                       itemStackHandler itemStackHandler,
                       ItemStack itemStackBeingHeld) {
-        super(startupCommon.containerType, windowId);
+        super(containerRegister.kateBucketContainer, windowId);
         this.itemStackHandler = itemStackHandler;
         this.itemStackBeingHeld = itemStackBeingHeld;
         final int SLOT_X_SPACING = 18;
@@ -120,10 +121,10 @@ public class container extends Container {
     // In this case - if the player stops holding the bucket, return false
     // Called on the server side only.
     @Override
-    public boolean canInteractWith(@Nonnull PlayerEntity player) {
+    public boolean stillValid(@Nonnull PlayerEntity player) {
 
-        ItemStack main = player.getHeldItemMainhand();
-        ItemStack off = player.getHeldItemOffhand();
+        ItemStack main = player.getMainHandItem();
+        ItemStack off = player.getOffhandItem();
         return (!main.isEmpty() && main == itemStackBeingHeld) ||
                 (!off.isEmpty() && off == itemStackBeingHeld);
     }
@@ -137,22 +138,22 @@ public class container extends Container {
     //   otherwise, returns a copy of the source stack
     @Nonnull
     @Override
-    public ItemStack transferStackInSlot(@NotNull PlayerEntity player, int sourceSlotIndex) {
-        Slot sourceSlot = inventorySlots.get(sourceSlotIndex);
-        if (sourceSlot == null || !sourceSlot.getHasStack()) return ItemStack.EMPTY;  //EMPTY_ITEM
-        ItemStack sourceStack = sourceSlot.getStack();
+    public ItemStack quickMoveStack(@NotNull PlayerEntity player, int sourceSlotIndex) {
+        Slot sourceSlot = slots.get(sourceSlotIndex);
+        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
+        ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
         final int BUCKET_SLOT_COUNT = itemStackHandler.getSlots();
 
         // Check if the slot clicked is one of the vanilla container slots
         if (sourceSlotIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
             // This is a vanilla container slot so merge the stack into the bucket inventory
-            if (!mergeItemStack(sourceStack, BUCKET_INVENTORY_FIRST_SLOT_INDEX, BUCKET_INVENTORY_FIRST_SLOT_INDEX + BUCKET_SLOT_COUNT, false)){
+            if (!moveItemStackTo(sourceStack, BUCKET_INVENTORY_FIRST_SLOT_INDEX, BUCKET_INVENTORY_FIRST_SLOT_INDEX + BUCKET_SLOT_COUNT, false)){
                 return ItemStack.EMPTY;  // EMPTY_ITEM
             }
         } else if (sourceSlotIndex < BUCKET_INVENTORY_FIRST_SLOT_INDEX + BUCKET_SLOT_COUNT) {
             // This is a bucket slot so merge the stack into the players inventory
-            if (!mergeItemStack(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
+            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
                 return ItemStack.EMPTY;
             }
         } else {
@@ -162,9 +163,9 @@ public class container extends Container {
 
         // If stack size == 0 (the entire stack was moved) set slot contents to null
         if (sourceStack.getCount() == 0) {
-            sourceSlot.putStack(ItemStack.EMPTY);
+            sourceSlot.set(ItemStack.EMPTY);
         } else {
-            sourceSlot.onSlotChanged();
+            sourceSlot.setChanged();
         }
 
         sourceSlot.onTake(player, sourceStack);
@@ -184,14 +185,14 @@ public class container extends Container {
      *   you don't need to bother with marking it dirty.
      */
     @Override
-    public void detectAndSendChanges() {
+    public void broadcastChanges() {
         if (itemStackHandler.isDirty()) {
             CompoundNBT nbt = itemStackBeingHeld.getOrCreateTag();
             int dirtyCounter = nbt.getInt("dirtyCounter");
             nbt.putInt("dirtyCounter", dirtyCounter + 1);
             itemStackBeingHeld.setTag(nbt);
         }
-        super.detectAndSendChanges();
+        super.broadcastChanges();
     }
 
     private static final Logger LOGGER = LogManager.getLogger();

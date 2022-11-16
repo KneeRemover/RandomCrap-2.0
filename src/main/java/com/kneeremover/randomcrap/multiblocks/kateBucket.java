@@ -81,24 +81,22 @@ public class kateBucket {
 
     @SubscribeEvent
     public static void clickbucket(PlayerInteractEvent.RightClickBlock event) {
-        if (test(event.getWorld(), event.getPos(), event.getHand()) && !event.getWorld().isRemote) {
-            event.getPlayer().sendStatusMessage(new TranslationTextComponent("event.randomcrap.multiblock.valid"), true);
-            if (event.getPlayer().getHeldItemMainhand().getItem() == Items.BUCKET) {
+        if (test(event.getWorld(), event.getPos(), event.getHand()) && !event.getWorld().isClientSide) {
+            event.getPlayer().displayClientMessage(new TranslationTextComponent("event.randomcrap.multiblock.valid"), true);
+            if (event.getPlayer().getMainHandItem().getItem() == Items.BUCKET) {
                 takeOne((ServerPlayerEntity) event.getPlayer());
-                event.getPlayer().addItemStackToInventory(itemInstance(itemRegister.KATE_BUCKET));
+                event.getPlayer().addItem(itemInstance(itemRegister.KATE_BUCKET));
             }
         }
     }
 
     public static boolean test(World world, BlockPos pos, Hand hand) {
         // Make sure it's server side and only returns once
-        if (!world.isRemote && hand == MAIN_HAND) {
+        if (!world.isClientSide && hand == MAIN_HAND) {
             ServerWorld sworld = (ServerWorld) world;
-            pos = pos.add(0, -1, 0);
+            pos = pos.offset(0, -1, 0);
             Rotation rot = BUCKET_UPGRADER.get().validate(world, pos);
-            if (rot != null) {
-                return true;
-            }
+            return rot != null;
         }
         return false;
     }

@@ -25,32 +25,32 @@ public class blockRegister {
             = DeferredRegister.create(ForgeRegistries.BLOCKS, modid);
 
     public static final RegistryObject<Block> RUBY_BLOCK = registerBlock("ruby_block",
-            () -> new Block(AbstractBlock.Properties.create(Material.IRON)
-                    .harvestLevel(2).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(5f)));
+            () -> new Block(AbstractBlock.Properties.of(Material.METAL)
+                    .harvestLevel(2).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(5f)));
 
     public static final RegistryObject<Block> RUBY_ORE = registerBlock("ruby_ore",
-            () -> new Block(AbstractBlock.Properties.create(Material.IRON)
-                    .harvestLevel(2).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2f)));
+            () -> new Block(AbstractBlock.Properties.of(Material.METAL)
+                    .harvestLevel(2).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(2f)));
 
     public static final RegistryObject<Block> OIL_CAULDRON = registerBlock("oil_cauldron",
-            () -> new oilCauldron(AbstractBlock.Properties.create(Material.IRON)
-                    .harvestLevel(0).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2f).notSolid()));
+            () -> new oilCauldron(AbstractBlock.Properties.of(Material.METAL)
+                    .harvestLevel(0).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(2f).noOcclusion()));
 
     public static final RegistryObject<Block> BUTCHER_TABLE = registerBlock("butcher_table",
-            () -> new butcherTable(AbstractBlock.Properties.create(Material.WOOD)
-                    .harvestLevel(1).harvestTool(ToolType.AXE).hardnessAndResistance(2f)));
+            () -> new butcherTable(AbstractBlock.Properties.of(Material.WOOD)
+                    .harvestLevel(1).harvestTool(ToolType.AXE).strength(2f)));
 
     public static final RegistryObject<Block> ENERGISED_STONE_BLOCK = registerBlock("energised_stone_block",
-            () -> new Block(AbstractBlock.Properties.create(Material.IRON)
-                    .harvestLevel(1).harvestTool(ToolType.AXE).hardnessAndResistance(2f)));
+            () -> new Block(AbstractBlock.Properties.of(Material.METAL)
+                    .harvestLevel(1).harvestTool(ToolType.AXE).strength(2f)));
 
     public static final RegistryObject<Block> BLUE_HOPPER = registerBlock("blue_hopper",
-            () -> new Block(AbstractBlock.Properties.create(Material.IRON)
-                    .harvestLevel(2).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2f).hardnessAndResistance(2f).notSolid().setOpaque(returnFalse)));
+            () -> new Block(AbstractBlock.Properties.of(Material.METAL)
+                    .harvestLevel(2).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(2f).noOcclusion().isViewBlocking(returnFalse)));
 
     public static final RegistryObject<Block> BUCKET_UPGRADE = registerBlock("bucket_upgrade_station",
-            () -> new Block(AbstractBlock.Properties.create(Material.IRON)
-                    .harvestLevel(2).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2f)));
+            () -> new Block(AbstractBlock.Properties.of(Material.METAL)
+                    .harvestLevel(2).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(2f)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
@@ -60,7 +60,7 @@ public class blockRegister {
 
     private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block) {
         itemRegister.ITEMS.register(name, () -> new BlockItem(block.get(),
-                new Item.Properties().group(RandomCrap.TAB)));
+                new Item.Properties().tab(RandomCrap.TAB)));
     }
 
     public static void register(IEventBus eventBus) {

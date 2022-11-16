@@ -13,6 +13,7 @@ public class leftClick {
     public leftClick () {
 
     }
+    @SuppressWarnings("EmptyMethod")
     public static void encode(leftClick message, PacketBuffer buffer) {
     }
 
@@ -25,7 +26,7 @@ public class leftClick {
         context.enqueueWork(() -> {
             ServerPlayerEntity player = context.getSender();
             /*handheldWaystone.leftClickPacket(player, message.stack, Objects.requireNonNull(context.getSender()).world.isRemote);*/
-            ItemStack stack = player.getHeldItemMainhand();
+            ItemStack stack = player.getMainHandItem();
             handheldWaystone.leftClickPacket(stack, player);
         });
         context.setPacketHandled(true);

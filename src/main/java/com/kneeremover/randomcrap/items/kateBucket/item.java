@@ -33,17 +33,17 @@ public class item extends Item {
     private static final int STACK_SIZE = 1;
 
     public item(Properties properties) {
-        super(properties.maxStackSize(STACK_SIZE) // the item will appear on the Miscellaneous tab in creative
+        super(properties.stacksTo(STACK_SIZE) // the item will appear on the Miscellaneous tab in creative
         );
     }
 
     @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(@NotNull World world, PlayerEntity player, @Nonnull Hand hand) {
-        ItemStack stack = player.getHeldItem(hand);
+    public ActionResult<ItemStack> use(@NotNull World world, PlayerEntity player, @Nonnull Hand hand) {
+        ItemStack stack = player.getItemInHand(hand);
         if (stack.getOrCreateTag().getBoolean("used")) {
             int current = stack.getOrCreateTag().getInt("current");
-            if (player.isSneaking()) {
+            if (player.isCrouching()) {
                 if (current < 3) {
                     current++;
                 } else {
@@ -61,7 +61,7 @@ public class item extends Item {
                 nbt.putInt("dirtyCounter", dirtyCounter + 1);
                 stack.setTag(nbt);
 
-                if (!world.isRemote) {  // server only!
+                if (!world.isClientSide) {  // server only!
                     INamedContainerProvider containerProviderBucket = new ContainerProviderBucket(this, stack);
                     final int NUMBER_OF_FLOWER_SLOTS = 16;
                     NetworkHooks.openGui((ServerPlayerEntity) player,
@@ -72,13 +72,12 @@ public class item extends Item {
         } else {
             stack.getOrCreateTag().putBoolean("used", true);
         }
-        return ActionResult.resultSuccess(stack);
+        return ActionResult.success(stack);
     }
 
     private static class ContainerProviderBucket implements INamedContainerProvider {
         public ContainerProviderBucket(item item, ItemStack itemStackBucket) {
             this.itemStackBucket = itemStackBucket;
-            this.item = item;
         }
 
         @Override
@@ -93,7 +92,6 @@ public class item extends Item {
                     itemStackBucket);
         }
 
-        private final item item;
         private final ItemStack itemStackBucket;
     }
 
@@ -124,7 +122,7 @@ public class item extends Item {
     public static List<Item> bucketTools;
 
     public static void refresh(ItemStack stack, ToolType toolType, World world) {
-        if (!world.isRemote) {     // Only server side, of course.
+        if (!world.isClientSide) {     // Only server side, of course.
             bucketTools = new ArrayList<>();    // Reset the tools container
             for (Item item : tools) {           // Cycle through all the tools
                 if (item.getToolTypes(item.getItem().getDefaultInstance()).contains(toolType))

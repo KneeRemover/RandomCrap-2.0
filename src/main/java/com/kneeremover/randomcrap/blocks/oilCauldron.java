@@ -25,12 +25,12 @@ public class oilCauldron extends Block {
     }
 
     @Override
-    public @NotNull ActionResultType onBlockActivated(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            if (player.getHeldItemMainhand().getItem().asItem() == Items.POTATO && taterGenerator.test(worldIn, pos, handIn)) {
+    public @NotNull ActionResultType use(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
+        if (!worldIn.isClientSide) {
+            if (player.getMainHandItem().getItem().asItem() == Items.POTATO && taterGenerator.test(worldIn, pos, handIn)) {
                 takeOne((ServerPlayerEntity) player);
-                player.addItemStackToInventory(itemInstance(itemRegister.TATER_TOTS));
-                worldIn.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
+                player.addItem(itemInstance(itemRegister.TATER_TOTS));
+                worldIn.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
             }
         }
         return ActionResultType.SUCCESS;

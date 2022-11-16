@@ -18,16 +18,16 @@ public class clock extends Item {
     }
 
     @Override
-    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World world, PlayerEntity player, @Nonnull Hand hand) {
-        ItemStack stack = player.getHeldItem(hand);
-        if (player.getCooldownTracker().getCooldown(itemRegister.STOPWATCH.get(), 1) == 0) {
+    public @NotNull ActionResult<ItemStack> use(@NotNull World world, PlayerEntity player, @Nonnull Hand hand) {
+        ItemStack stack = player.getMainHandItem();
+        if (!player.getCooldowns().isOnCooldown(itemRegister.STOPWATCH.get())) {
             try {
                 Thread.sleep(5000);
-                player.getCooldownTracker().setCooldown(itemRegister.STOPWATCH.get(), 12000);
+                player.getCooldowns().addCooldown(itemRegister.STOPWATCH.get(), 12000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
-        return ActionResult.resultSuccess(stack);
+        return ActionResult.success(stack);
     }
 }

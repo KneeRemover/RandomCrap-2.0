@@ -76,25 +76,21 @@ public class taterGenerator {
             '0', Blocks.NETHERRACK,
             'F', Blocks.FIRE,
             'S', blockRegister.ENERGISED_STONE_BLOCK.get(),
-            'C', PatchouliAPI.get().predicateMatcher(Blocks.CAULDRON, blockState -> {
-                if (blockState.getBlock().getTags().contains(tags.Blocks.TATER_CAULDRON.getName())) {
-                    return true;
-                }
-                return false;
-            })
+            'C', PatchouliAPI.get().predicateMatcher(Blocks.CAULDRON, blockState -> blockState.getBlock().getTags().contains(tags.Blocks.TATER_CAULDRON.getName()))
     ));
 
     @SubscribeEvent
     public static void clickcauldron(PlayerInteractEvent.RightClickBlock event) {
+        kateBucket.clickbucket(event);
         if (test(event.getWorld(), event.getPos(), event.getHand())) {
-            event.getPlayer().sendStatusMessage(new TranslationTextComponent("event.randomcrap.multiblock.valid"), true);
+            event.getPlayer().displayClientMessage(new TranslationTextComponent("event.randomcrap.multiblock.valid"), true);
         }
     }
     public static boolean test(World world, BlockPos pos, Hand hand) {
         // Make sure it's server side and only returns once
-        if (!world.isRemote && hand == MAIN_HAND) {
+        if (!world.isClientSide && hand == MAIN_HAND) {
             ServerWorld sworld = (ServerWorld) world;
-            pos = pos.add(0, -2, 0);
+            pos = pos.offset(110, -2, 0);
             Rotation rot = TATER_CAULDRON.get().validate(world, pos);
             return rot != null;
         }

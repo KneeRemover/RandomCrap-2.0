@@ -26,32 +26,32 @@ public class rocket extends Item {
 
     // going on a trip
     @Override
-    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World world, PlayerEntity player, @Nonnull Hand hand) {
-        ItemStack stack = player.getHeldItemMainhand();
-        if (!world.isRemote) {
-            if (player.getCooldownTracker().getCooldown(itemRegister.ROCKET_SHIP.get(), 1) == 0) {
-                player.getCooldownTracker().setCooldown(itemRegister.ROCKET_SHIP.get(), 200);
+    public @NotNull ActionResult<ItemStack> use(@NotNull World world, PlayerEntity player, @Nonnull Hand hand) {
+        ItemStack stack = player.getMainHandItem();
+        if (!world.isClientSide) {
+            if (!player.getCooldowns().isOnCooldown(itemRegister.ROCKET_SHIP.get())) {
+                player.getCooldowns().addCooldown(itemRegister.ROCKET_SHIP.get(), 200);
                 CompoundNBT nbt = stack.getOrCreateTag();
                 nbt.putBoolean("isBoosting", true);
-                nbt.putInt("age", player.ticksExisted);
-                stack.write(nbt);
+                nbt.putLong("age", world.getGameTime());
+                stack.setTag(nbt);
             }
         }
-        return ActionResult.resultSuccess(stack);
+        return ActionResult.success(stack);
     }
 
     @SubscribeEvent
     public static void tick(TickEvent.PlayerTickEvent event) {
-        if (event.player.getHeldItemMainhand().getItem() == itemRegister.ROCKET_SHIP.get()) {
-            CompoundNBT nbt = event.player.getHeldItemMainhand().getOrCreateTag();
+        if (event.player.getMainHandItem().getItem() == itemRegister.ROCKET_SHIP.get()) {
+            CompoundNBT nbt = event.player.getMainHandItem().getOrCreateTag();
             if (nbt.getBoolean("isBoosting")) {
-                if (!event.player.collidedHorizontally && !event.player.collidedVertically && abs(nbt.getInt("age") - event.player.ticksExisted) <= 3) {
-                    event.player.setMotion(Vector3d.fromPitchYaw(event.player.getPitchYaw()).normalize());
-                    nbt.putInt("age", event.player.ticksExisted);
+                if (!event.player.horizontalCollision && !event.player.verticalCollision && abs(nbt.getLong("age") - event.player.level.getGameTime()) <= 3) {
+                    event.player.setDeltaMovement(Vector3d.directionFromRotation(event.player.getRotationVector()).normalize());
+                    nbt.putLong("age", event.player.level.getGameTime());
                 } else {
-                    event.player.getHeldItemMainhand().setCount(event.player.getHeldItemMainhand().getCount() - 1);
+                    event.player.getMainHandItem().shrink(1);
                     nbt.putBoolean("isBoosting", false);
-                    event.player.getHeldItemMainhand().write(nbt);
+                    event.player.getMainHandItem().setTag(nbt);
                 }
             }
         }

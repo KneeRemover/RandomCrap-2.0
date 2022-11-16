@@ -3,11 +3,11 @@ package com.kneeremover.randomcrap;
 
 import com.kneeremover.randomcrap.items.handheldWaystone;
 import com.kneeremover.randomcrap.items.kateBucket.screen;
-import com.kneeremover.randomcrap.items.kateBucket.startupCommon;
 import com.kneeremover.randomcrap.items.rocket;
 import com.kneeremover.randomcrap.multiblocks.kateBucket;
 import com.kneeremover.randomcrap.multiblocks.taterGenerator;
 import com.kneeremover.randomcrap.registers.blockRegister;
+import com.kneeremover.randomcrap.registers.containerRegister;
 import com.kneeremover.randomcrap.registers.itemRegister;
 import com.kneeremover.randomcrap.util.network.main;
 import net.minecraft.client.gui.ScreenManager;
@@ -67,7 +67,7 @@ public class RandomCrap {
         blockRegister.register(eventBus);
         itemRegister.register(eventBus);
 
-        eventBus.register(startupCommon.class);
+        eventBus.register(containerRegister.class);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -82,19 +82,19 @@ public class RandomCrap {
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        ScreenManager.registerFactory(startupCommon.containerType, screen::new);
+        ScreenManager.register(containerRegister.kateBucketContainer, screen::new);
     }
 
     public static final ItemGroup TAB = new ItemGroup("crapTab") {
         @Override
-        public @NotNull ItemStack createIcon() {
+        public @NotNull ItemStack makeIcon() {
             return new ItemStack(itemRegister.RUBY.get());
         }
     };
 
     @SubscribeEvent
     public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {
-        startupCommon.registerContainers(event);
+        containerRegister.registerContainers(event);
     }
 
     public Method test(Method method) {

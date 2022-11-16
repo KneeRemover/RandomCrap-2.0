@@ -24,21 +24,22 @@ public class butcherTable extends Block {
     }
 
     @Override
-    public @NotNull ActionResultType onBlockActivated(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
-        if (!worldIn.isRemote && player.getHeldItemMainhand().getItem() == Items.BEEF) {
-                player.addItemStackToInventory(itemRegister.ANIMAL_FAT.get().getDefaultInstance());
+    public @NotNull ActionResultType use(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
+        if (!worldIn.isClientSide && player.getMainHandItem().getItem() == Items.BEEF) {
+                player.addItem(itemRegister.ANIMAL_FAT.get().getDefaultInstance());
                 takeOne((ServerPlayerEntity) player);
         }
         return ActionResultType.SUCCESS;
     }
 
+
     @Override
-    public void onBlockClicked(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player) {
-        if (!worldIn.isRemote && player.getHeldItemMainhand().getItem() == Items.BEEF) {
+    public void attack(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player) {
+        if (!worldIn.isClientSide && player.getMainHandItem().getItem() == Items.BEEF) {
             ItemStack animalFat = itemInstance(itemRegister.ENERGISED_STONE);
-            animalFat.setCount(player.getHeldItemMainhand().getCount());
-            player.addItemStackToInventory(animalFat);
-            player.getHeldItemMainhand().setCount(0);
+            animalFat.setCount(player.getMainHandItem().getCount());
+            player.addItem(animalFat);
+            player.getMainHandItem().setCount(0);
         }
     }
 }

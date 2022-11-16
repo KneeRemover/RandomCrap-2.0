@@ -29,29 +29,29 @@ public class screen extends ContainerScreen<com.kneeremover.randomcrap.items.kat
     public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(@NotNull MatrixStack matrixStack, int mouseX, int mouseY) {
+    protected void renderTooltip(@NotNull MatrixStack matrixStack, int mouseX, int mouseY) {
         final float PLAYER_LABEL_XPOS = 8;
         final float PLAYER_LABEL_DISTANCE_FROM_BOTTOM = (96 - 2);
 
         final float BUCKET_LABEL_YPOS = -50;
         TranslationTextComponent redBucket = new TranslationTextComponent("randomcrap.gui.katebucket");
         float BUCKET_LABEL_XPOS = 8;                  // centre the label
-        this.font.drawString(matrixStack, redBucket.getString(), BUCKET_LABEL_XPOS, BUCKET_LABEL_YPOS, Color.darkGray.getRGB());            //this.font.drawString;
+        this.font.draw(matrixStack, redBucket.getString(), BUCKET_LABEL_XPOS, BUCKET_LABEL_YPOS, Color.darkGray.getRGB());            //this.font.drawString;
 
-        float PLAYER_LABEL_YPOS = ySize - PLAYER_LABEL_DISTANCE_FROM_BOTTOM;
-        this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getString(),                              //this.font.drawString;
+        float PLAYER_LABEL_YPOS = imageHeight - PLAYER_LABEL_DISTANCE_FROM_BOTTOM;
+        this.font.draw(matrixStack, this.inventory.getDisplayName().getString(),                              //this.font.drawString;
                 PLAYER_LABEL_XPOS, PLAYER_LABEL_YPOS, Color.darkGray.getRGB());
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    protected void drawGuiContainerBackgroundLayer(@NotNull MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(@NotNull MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        Objects.requireNonNull(this.minecraft).getTextureManager().bindTexture(TEXTURE);                //this.minecraft
+        Objects.requireNonNull(this.minecraft).getTextureManager().bind(TEXTURE);                //this.minecraft
         // width and height are the size provided to the window when initialised after creation.
         // xSize, ySize are the expected size of the texture-? usually seems to be left as a defaul.t.
         // The code below is typical for vanilla containers, so I've just copied that- it appears to centre the texture within

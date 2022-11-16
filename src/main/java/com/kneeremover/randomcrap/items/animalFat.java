@@ -20,12 +20,12 @@ public class animalFat extends Item {
 
     @Override
     public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
-        World world = context.getWorld();
-        if (!world.isRemote) {
+        World world = context.getLevel();
+        if (!world.isClientSide) {
             ServerWorld serverWorld = (ServerWorld) world;
-            BlockPos pos = context.getPos();
+            BlockPos pos = context.getClickedPos();
             if (serverWorld.getBlockState(pos).getBlock() == Blocks.CAULDRON.getBlock()) {
-                serverWorld.setBlockState(pos, blockInstance(blockRegister.OIL_CAULDRON));
+                serverWorld.setBlock(pos, blockInstance(blockRegister.OIL_CAULDRON), 1);
                 stack.setCount(stack.getCount() - 1);
             }
         }
