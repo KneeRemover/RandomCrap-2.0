@@ -18,10 +18,14 @@ public class leafWings extends Item {
     @Override
     public @NotNull ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (world.isClientSide) {
+        if (!world.isClientSide) {
+            if (!player.abilities.instabuild) {
+                stack.shrink(1);
+            }
+            player.fallDistance = 0;
             player.setDeltaMovement(Vector3d.directionFromRotation(player.getRotationVector()).normalize().multiply(3, 3, 3));
-            stack.shrink(1);
+            player.hurtMarked = true;
         }
-        return ActionResult.success(stack);
+        return ActionResult.sidedSuccess(stack, world.isClientSide());
     }
 }

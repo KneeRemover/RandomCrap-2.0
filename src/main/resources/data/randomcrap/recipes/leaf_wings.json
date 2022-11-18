@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#$#",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "$": {
+      "item": "randomcrap:ruby"
+    },
+    "#": {
+      "tag": "minecraft:leaves"
+    }
+  },
+  "result": {
+    "item": "randomcrap:leaf_wings"
+  }
+}
