@@ -16,7 +16,7 @@ public class leafWings extends Item {
     }
 
     @Override
-    public @NotNull ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+    public @NotNull ActionResult<ItemStack> use(World world, PlayerEntity player, @NotNull Hand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (!world.isClientSide) {
             if (!player.abilities.instabuild) {

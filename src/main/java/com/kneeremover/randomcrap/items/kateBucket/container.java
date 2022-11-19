@@ -64,8 +64,8 @@ public class container extends Container {
     private static final int BUCKET_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
     private static final int MAX_EXPECTED_BUCKET_SLOT_COUNT = 54;
 
-    public static final int BUCKET_INVENTORY_YPOS = -38;  // the ContainerScreenBucket needs to know these so it can tell where to draw the Titles
-    public static final int PLAYER_INVENTORY_YPOS = 84;
+    public static final int BUCKET_INVENTORY_YPOS = -10;  // the ContainerScreenBucket needs to know these so it can tell where to draw the Titles
+    public static final int PLAYER_INVENTORY_YPOS = 112;
 
     /**
      * Creates a container suitable for server side or client side
@@ -82,7 +82,7 @@ public class container extends Container {
         final int SLOT_X_SPACING = 18;
         final int SLOT_Y_SPACING = 18;
         final int HOTBAR_XPOS = 8;
-        final int HOTBAR_YPOS = 142;
+        final int HOTBAR_YPOS = PLAYER_INVENTORY_YPOS + 58;
         // Add the players hotbar to the gui - the [xpos, ypos] location of each item
         for (int x = 0; x < HOTBAR_SLOT_COUNT; x++) {
             addSlot(new Slot(playerInv, x, HOTBAR_XPOS + SLOT_X_SPACING * x, HOTBAR_YPOS));

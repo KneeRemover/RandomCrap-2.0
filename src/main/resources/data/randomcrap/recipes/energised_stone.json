@@ -10,7 +10,7 @@
       "item": "minecraft:bookshelf"
     },
     "$": {
-      "item": "minecraft:diamond"
+      "tag": "forge:stone"
     },
     "-": {
       "item": "randomcrap:ruby"

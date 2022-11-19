@@ -1,25 +1,37 @@
 {
   "item.randomcrap.ruby": "Ruby",
   "item.randomcrap.handheld_waystone": "Handheld Waystone",
-  "key.categories.rc": "RandomCrap 2.0",
+  "item.randomcrap.kate_bucket": "Red Bucket",
+  "item.randomcrap.handheldWaystone.slot": "Selected slot: ",
   "item.randomcrap.energised_stone": "Energised Stone",
   "item.randomcrap.sigil": "Sigil",
   "item.randomcrap.teleportation_core": "Teleportation Core",
+  "item.randomcrap.animal_fat": "Animal Fat",
+  "item.randomcrap.tater_tots": "TATER TOTS",
+  "item.randomcrap.compact_energised_stone": "Compact Energised Stone",
+  "item.randomcrap.rocket_ship": "Rocket Ship",
+  "item.randomcrap.stopwatch": "Stopwatch",
+  "item.randomcrap.leaf_wings": "Leaf Wings",
+  "item.randomcrap.energised_pickaxe": "Energised Pickaxe",
+  "item.randomcrap.energised_axe": "Energised Axe",
+  "item.randomcrap.energised_shovel": "Energised Shovel",
+  "item.randomcrap.energised_hoe": "Energised Hoe",
+  "item.randomcrap.energised_sword": "Energised Sword",
+
+  "item.randomcrap.handheldWaystone.error.unsetPos": "No position has been set!",
+  "item.randomcrap.handheldWaystone.setPos": "Position set!",
+
   "block.randomcrap.ruby_block": "Block of Ruby",
   "block.randomcrap.ruby_ore": "Ruby Ore",
   "block.randomcrap.oil_cauldron": "Cauldron of Animal Fat",
-  "item.randomcrap.animal_fat": "Animal Fat",
   "block.randomcrap.butcher_table": "Butchering Table",
   "block.randomcrap.energised_stone_block": "Compact Energised Stone Block",
   "block.randomcrap.blue_hopper": "Infusion Hopper",
   "block.randomcrap.bucket_upgrade_station": "Bucket Upgrade Station",
-  "item.randomcrap.tater_tots": "TATER TOTS",
-  "item.randomcrap.compact_energised_stone": "Compact Energised Stone",
-  "event.randomcrap.multiblock.valid": "Structure valid!",
+
+  "key.categories.rc": "RandomCrap 2.0",
   "itemGroup.crapTab": "RandomCrap 2.0",
-  "item.randomcrap.handheldWaystone.error.unsetPos": "No position has been set!",
-  "item.randomcrap.handheldWaystone.setPos": "Position set!",
-  "randomcrap.gui.katebucket": "Red Bucket",
-  "item.randomcrap.kate_bucket": "Red Bucket",
-  "item.randomcrap.handheldWaystone.slot": "Selected slot: "
+
+  "event.randomcrap.multiblock.valid": "Structure valid!",
+  "randomcrap.gui.katebucket": "Red Bucket"
 }

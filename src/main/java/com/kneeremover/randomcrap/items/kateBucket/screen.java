@@ -20,6 +20,14 @@ import java.util.Objects;
 //         * renderHoveredToolTip - for tool tips when the mouse is hovering over something of interest
 
 public class screen extends ContainerScreen<com.kneeremover.randomcrap.items.kateBucket.container> {
+    @Override
+    protected void init() {
+        super.init();
+        this.imageWidth = 176;
+        this.imageHeight = 222;
+        this.leftPos = (this.width - this.imageWidth) / 2;
+        this.topPos = (this.height - this.imageHeight) / 2;
+    }
 
     public screen(com.kneeremover.randomcrap.items.kateBucket.container container, PlayerInventory playerInv, ITextComponent title) {
         super(container, playerInv, title);
@@ -34,18 +42,17 @@ public class screen extends ContainerScreen<com.kneeremover.randomcrap.items.kat
 
     @Override
     protected void renderTooltip(@NotNull MatrixStack matrixStack, int mouseX, int mouseY) {
-        final float PLAYER_LABEL_XPOS = 8;
-        final float PLAYER_LABEL_DISTANCE_FROM_BOTTOM = (96 - 2);
-
-        final float BUCKET_LABEL_YPOS = -50;
         TranslationTextComponent redBucket = new TranslationTextComponent("randomcrap.gui.katebucket");
-        float BUCKET_LABEL_XPOS = 8;                  // centre the label
-        this.font.draw(matrixStack, redBucket.getString(), BUCKET_LABEL_XPOS, BUCKET_LABEL_YPOS, Color.darkGray.getRGB());            //this.font.drawString;
+        float LABEL_XPOS = leftPos + 8;
+        float PLAYER_LABEL_YPOS = topPos + 100;
+        float BUCKET_LABEL_YPOS = topPos - 20;
 
-        float PLAYER_LABEL_YPOS = imageHeight - PLAYER_LABEL_DISTANCE_FROM_BOTTOM;
-        this.font.draw(matrixStack, this.inventory.getDisplayName().getString(),                              //this.font.drawString;
-                PLAYER_LABEL_XPOS, PLAYER_LABEL_YPOS, Color.darkGray.getRGB());
+        this.font.draw(matrixStack, redBucket.getString(), LABEL_XPOS, BUCKET_LABEL_YPOS, Color.darkGray.getRGB());
+        this.font.draw(matrixStack, this.inventory.getDisplayName().getString(),
+                LABEL_XPOS, PLAYER_LABEL_YPOS, Color.darkGray.getRGB());
     }
+    @Override
+    protected void renderLabels(MatrixStack pMatrixStack, int pX, int pY) {}
 
     @SuppressWarnings("deprecation")
     @Override
