@@ -5,12 +5,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "A diamond infused with enchanting power and rubies, this stone is used in just about every recipe. The names of the blocks also get really long, so ES is short for Energised Stone."
+      "text": "A stone infused with enchanting power and rubies, this stone is used in just about every recipe. The names of the blocks also get really long, so ES is short for Energised Stone."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Stone Energiser",
+      "multiblock_id": "randomcrap:enchanter"
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "randomcrap:energised_stone",
-      "text": "Crafting an Energised Stone"
+      "recipe": "randomcrap:ruby_compound"
     }
   ]
 }

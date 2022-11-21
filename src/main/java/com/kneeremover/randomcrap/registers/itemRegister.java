@@ -41,6 +41,7 @@ public class itemRegister {
     public static final RegistryObject<Item> STOPWATCH = ITEMS.register("stopwatch", () -> new clock(new Item.Properties().tab(RandomCrap.TAB)));
     public static final RegistryObject<Item> KATE_BUCKET = ITEMS.register("kate_bucket", () -> new item(new Item.Properties().tab(RandomCrap.TAB)));
     public static final RegistryObject<Item> LEAF_WINGS = ITEMS.register("leaf_wings", () -> new leafWings(new Item.Properties().tab(RandomCrap.TAB)));
+    public static final RegistryObject<Item> RUBY_COMPOUND = ITEMS.register("ruby_compound", () -> new rubyCompound(new Item.Properties().tab(RandomCrap.TAB)));
 
     //   FOOD   \\
 

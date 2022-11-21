@@ -1,0 +1,16 @@
+{
+  "name": "Leaf Wings",
+  "icon": "randomcrap:leaf_wings",
+  "category": "randomcrap:items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "text": "One time use item that flings you! Cancles fall damage ON USE, but not after or before.",
+      "item": "randomcrap:leaf_wings"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:leaf_wings"
+    }
+  ]
+}

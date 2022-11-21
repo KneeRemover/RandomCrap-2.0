@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "$$$",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "$": {
+      "item": "randomcrap:compact_energised_stone"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "randomcrap:energised_pickaxe"
+  }
+}

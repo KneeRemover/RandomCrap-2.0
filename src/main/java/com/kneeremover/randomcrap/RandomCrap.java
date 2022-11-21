@@ -4,6 +4,7 @@ package com.kneeremover.randomcrap;
 import com.kneeremover.randomcrap.items.handheldWaystone;
 import com.kneeremover.randomcrap.items.kateBucket.screen;
 import com.kneeremover.randomcrap.items.rocket;
+import com.kneeremover.randomcrap.multiblocks.enchanter;
 import com.kneeremover.randomcrap.multiblocks.kateBucket;
 import com.kneeremover.randomcrap.multiblocks.taterGenerator;
 import com.kneeremover.randomcrap.registers.blockRegister;
@@ -33,6 +34,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.kneeremover.randomcrap.multiblocks.enchanter.STONE_ENERGISER;
 import static com.kneeremover.randomcrap.multiblocks.kateBucket.BUCKET_UPGRADER;
 import static com.kneeremover.randomcrap.multiblocks.taterGenerator.TATER_CAULDRON;
 import static com.kneeremover.randomcrap.util.crapLib.append;
@@ -56,9 +58,10 @@ public class RandomCrap {
         forgeEventBus.addListener(handheldWaystone::leftClick);
         forgeEventBus.addListener(handheldWaystone::onWorldSave);
         forgeEventBus.addListener(handheldWaystone::AnvilUpdateEvent);
-        forgeEventBus.addListener(kateBucket::clickbucket);
-        forgeEventBus.addListener(taterGenerator::clickcauldron);
+        forgeEventBus.addListener(kateBucket::click);
+        forgeEventBus.addListener(taterGenerator::click);
         forgeEventBus.addListener(rocket::tick);
+        forgeEventBus.addListener(enchanter::click);
 
         //    Class Registries
         forgeEventBus.register(this);
@@ -73,6 +76,7 @@ public class RandomCrap {
     private void setup(final FMLCommonSetupEvent event) {
         PatchouliAPI.get().registerMultiblock(append("tater_cauldron"), TATER_CAULDRON.get());
         PatchouliAPI.get().registerMultiblock(append("kate_bucket"), BUCKET_UPGRADER.get());
+        PatchouliAPI.get().registerMultiblock(append("enchanter"), STONE_ENERGISER.get());
         main.init();
         for (Item item : ForgeRegistries.ITEMS.getValues()) {
             if (!item.getToolTypes(item.getItem().getDefaultInstance()).isEmpty()) {

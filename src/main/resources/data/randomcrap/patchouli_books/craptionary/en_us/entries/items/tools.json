@@ -1,0 +1,26 @@
+{
+  "name": "Energised Tools",
+  "icon": "randomcrap:energised_pickaxe",
+  "category": "randomcrap:items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "text": "Various tools made from (compact) energised stone. Repaired using regular energised stone.",
+      "item": "randomcrap:compact_energised_stone"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:energised_sword",
+      "recipe2": "randomcrap:energised_pickaxe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:energised_axe_correct",
+      "recipe2": "randomcrap:energised_hoe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:energised_shovel"
+    }
+  ]
+}

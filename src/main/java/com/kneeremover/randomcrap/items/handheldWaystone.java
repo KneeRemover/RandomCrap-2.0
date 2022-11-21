@@ -71,25 +71,25 @@ public class handheldWaystone extends Item {
         if (stack.getItem() instanceof handheldWaystone && !player.getCooldowns().isOnCooldown(itemRegister.HANDHELD_WAYSTONE.get())) {
             player.getCooldowns().addCooldown(itemRegister.HANDHELD_WAYSTONE.get(), 20);
             CompoundNBT nbt = stack.getOrCreateTag();
-            int slot = nbt.getInt("slot");
+            int slot = nbt.getInt("randomcrap.slot");
 
             if (slot == 0) {
                 slot = 1;
-                nbt.putInt("slot", 1);
+                nbt.putInt("randomcrap.slot", 1);
             }
-            if (nbt.getInt("maxSlots") == 0) {
-                nbt.putInt("maxSlots", 1);
+            if (nbt.getInt("randomcrap.maxSlots") == 0) {
+                nbt.putInt("randomcrap.maxSlots", 1);
             }
             stack.setTag(nbt); // if 0 make 1
 
-            if (slot >= nbt.getInt("maxSlots")) {
-                LOGGER.info("Looping around because slot is " + slot + " and maxSlots is " + nbt.getInt("maxSlots"));
+            if (slot >= nbt.getInt("randomcrap.maxSlots")) {
+                LOGGER.info("Looping around because slot is " + slot + " and maxSlots is " + nbt.getInt("randomcrap.maxSlots"));
                 slot = 1;
-                nbt.putInt("slot", 1);
+                nbt.putInt("randomcrap.slot", 1);
             } else {
                 LOGGER.info("Incrementing slots from " + slot + " to " + (slot + 1));
                 slot++;
-                nbt.putInt("slot", slot);
+                nbt.putInt("randomcrap.slot", slot);
             }
             stack.setTag(nbt);
             assert player != null;
@@ -103,7 +103,7 @@ public class handheldWaystone extends Item {
             player, @Nonnull Hand hand) {
         ItemStack stack = player.getMainHandItem();
         CompoundNBT nbt = stack.getOrCreateTag();
-        int slot = nbt.getInt("slot");
+        int slot = nbt.getInt("randomcrap.slot");
         if (dimensions == null || dimensions.isEmpty()) {
             if (world instanceof ServerWorld) {
                 dimensions = new HashMap<>();
@@ -117,25 +117,25 @@ public class handheldWaystone extends Item {
         if (!world.isClientSide) {
             ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
             @SuppressWarnings("ConstantConditions") ServerWorld serverWorld = (ServerWorld) world;
-            if (nbt.getInt("slot") == 0) {
-                nbt.putInt("slot", 1);
-                nbt.putInt("maxSlots", 1);
+            if (nbt.getInt("randomcrap.slot") == 0) {
+                nbt.putInt("randomcrap.slot", 1);
+                nbt.putInt("randomcrap.maxSlots", 1);
                 stack.setTag(nbt);
             }
             if (player.isCrouching() && !(player.getOffhandItem().getItem() instanceof handheldWaystone)) {
-                nbt.putDouble("xpos" + slot, player.position().x());
-                nbt.putDouble("ypos" + slot, player.position().y());
-                nbt.putDouble("zpos" + slot, player.position().z());
-                nbt.putString("dim" + slot, serverWorld.dimension().location().toString());
-                nbt.putString("dimName" + slot, serverWorld.dimension().location().getNamespace());
+                nbt.putDouble("randomcrap.xpos" + slot, player.position().x());
+                nbt.putDouble("randomcrap.ypos" + slot, player.position().y());
+                nbt.putDouble("randomcrap.zpos" + slot, player.position().z());
+                nbt.putString("randomcrap.dim" + slot, serverWorld.dimension().location().toString());
+                nbt.putString("randomcrap.dimName" + slot, serverWorld.dimension().location().getNamespace());
                 player.displayClientMessage(new TranslationTextComponent("item.randomcrap.handheldWaystone.setPos"), true);
                 stack.setTag(nbt);
-            } else if (nbt.getFloat("xpos" + slot) == 0) {
+            } else if (nbt.getFloat("randomcrap.xpos" + slot) == 0) {
                 player.displayClientMessage(new TranslationTextComponent("item.randomcrap.handheldWaystone.error.unsetPos"), true);
             } else {
-                double x = nbt.getDouble("xpos" + slot);
-                double y = nbt.getDouble("ypos" + slot);
-                double z = nbt.getDouble("zpos" + slot);
+                double x = nbt.getDouble("randomcrap.xpos" + slot);
+                double y = nbt.getDouble("randomcrap.ypos" + slot);
+                double z = nbt.getDouble("randomcrap.zpos" + slot);
 
                 // TODO This isn't actually a todo, but IDEs will highlight it, so you people will see it. Below is a way to TRANSFORM A STRING INTO A REGISTRY KEY.
                 // TODO Use this for storing dimensions in NBT.
@@ -155,10 +155,10 @@ public class handheldWaystone extends Item {
             ItemStack mod = evt.getRight();
             ItemStack output = input.copy();
             CompoundNBT nbt = output.getOrCreateTag();
-            if (nbt.getInt("maxSlots") == 0) {
-                nbt.putInt("maxSlots", 1 + mod.getCount());
+            if (nbt.getInt("randomcrap.maxSlots") == 0) {
+                nbt.putInt("randomcrap.maxSlots", 1 + mod.getCount());
             } else {
-                nbt.putInt("maxSlots", nbt.getInt("maxSlots") + mod.getCount());
+                nbt.putInt("randomcrap.maxSlots", nbt.getInt("randomcrap.maxSlots") + mod.getCount());
             }
             evt.setOutput(output);
             evt.setCost(1);

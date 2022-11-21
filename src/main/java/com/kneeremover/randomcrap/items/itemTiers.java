@@ -8,7 +8,7 @@ import net.minecraft.util.LazyValue;
 import java.util.function.Supplier;
 
 public enum itemTiers implements IItemTier{
-    ENERGISED( 3,  3000,20, 6, 9, () -> Ingredient.of(itemRegister.ENERGISED_STONE.get()));
+    ENERGISED( 3,  3000,30, 6, 9, () -> Ingredient.of(itemRegister.ENERGISED_STONE.get()));
 
     private final int harvestLevel;
     private final int maxUses;

@@ -11,7 +11,6 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -80,7 +79,7 @@ public class kateBucket {
     ));
 
     @SubscribeEvent
-    public static void clickbucket(PlayerInteractEvent.RightClickBlock event) {
+    public static void click(PlayerInteractEvent.RightClickBlock event) {
         if (test(event.getWorld(), event.getPos(), event.getHand()) && !event.getWorld().isClientSide) {
             event.getPlayer().displayClientMessage(new TranslationTextComponent("event.randomcrap.multiblock.valid"), true);
             if (event.getPlayer().getMainHandItem().getItem() == Items.BUCKET) {
@@ -93,7 +92,6 @@ public class kateBucket {
     public static boolean test(World world, BlockPos pos, Hand hand) {
         // Make sure it's server side and only returns once
         if (!world.isClientSide && hand == MAIN_HAND) {
-            ServerWorld sworld = (ServerWorld) world;
             pos = pos.offset(0, -1, 0);
             Rotation rot = BUCKET_UPGRADER.get().validate(world, pos);
             return rot != null;

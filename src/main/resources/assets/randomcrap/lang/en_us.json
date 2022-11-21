@@ -17,6 +17,7 @@
   "item.randomcrap.energised_shovel": "Energised Shovel",
   "item.randomcrap.energised_hoe": "Energised Hoe",
   "item.randomcrap.energised_sword": "Energised Sword",
+  "item.randomcrap.ruby_compound": "Ruby Compound",
 
   "item.randomcrap.handheldWaystone.error.unsetPos": "No position has been set!",
   "item.randomcrap.handheldWaystone.setPos": "Position set!",
@@ -28,6 +29,7 @@
   "block.randomcrap.energised_stone_block": "Compact Energised Stone Block",
   "block.randomcrap.blue_hopper": "Infusion Hopper",
   "block.randomcrap.bucket_upgrade_station": "Bucket Upgrade Station",
+  "block.randomcrap.ruby_bookshelf": "Ruby Bookshelf",
 
   "key.categories.rc": "RandomCrap 2.0",
   "itemGroup.crapTab": "RandomCrap 2.0",

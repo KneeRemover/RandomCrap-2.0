@@ -1,0 +1,16 @@
+{
+  "name": "Stopwatch",
+  "icon": "randomcrap:stopwatch",
+  "category": "randomcrap:goals",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "text": "Only can be crafted once per world, unless you have another mod that lets you get multiple ender dragons. Will STOP TIME for 5 seconds on use, with a 10 minute cooldown.",
+      "item": "randomcrap:stopwatch"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:stopwatch"
+    }
+  ]
+}

@@ -9,7 +9,6 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vazkii.patchouli.api.IMultiblock;
@@ -80,8 +79,8 @@ public class taterGenerator {
     ));
 
     @SubscribeEvent
-    public static void clickcauldron(PlayerInteractEvent.RightClickBlock event) {
-        kateBucket.clickbucket(event);
+    public static void click(PlayerInteractEvent.RightClickBlock event) {
+        kateBucket.click(event);
         if (test(event.getWorld(), event.getPos(), event.getHand())) {
             event.getPlayer().displayClientMessage(new TranslationTextComponent("event.randomcrap.multiblock.valid"), true);
         }
@@ -89,8 +88,7 @@ public class taterGenerator {
     public static boolean test(World world, BlockPos pos, Hand hand) {
         // Make sure it's server side and only returns once
         if (!world.isClientSide && hand == MAIN_HAND) {
-            ServerWorld sworld = (ServerWorld) world;
-            pos = pos.offset(110, -2, 0);
+            pos = pos.offset(0, -2, 0);
             Rotation rot = TATER_CAULDRON.get().validate(world, pos);
             return rot != null;
         }

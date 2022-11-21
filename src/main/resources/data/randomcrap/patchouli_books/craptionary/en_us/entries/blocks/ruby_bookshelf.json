@@ -1,0 +1,16 @@
+{
+  "name": "Ruby Bookshelf",
+  "icon": "randomcrap:ruby_bookshelf",
+  "category": "randomcrap:blocks",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Used in $(l:randomcrap:basic_items/energised_stone)Energised Stone$() creation."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:ruby_bookshelf",
+      "text": ""
+    }
+  ]
+}

@@ -17,8 +17,8 @@ public enum OreType {
     OreType(Lazy<Block> block) {
         this.block = block;
         this.maxVeinSize = 4;
-        this.minHeight = 1;
-        this.maxHeight = 30;
+        this.minHeight = 20;
+        this.maxHeight = 50  ;
     }
 
     public Lazy<Block> getBlock() {
