@@ -26,7 +26,6 @@ public class itemRegister {
     public static final RegistryObject<Item> ENERGISED_HOE = ITEMS.register("energised_hoe", () -> new HoeItem(itemTiers.ENERGISED, 0, 0, new Item.Properties().tab(RandomCrap.TAB)));
 
     //  WPNS    \\
-
     public static final RegistryObject<Item> ENERGISED_SWORD = ITEMS.register("energised_sword", () -> new SwordItem(itemTiers.ENERGISED, 10, 6, new Item.Properties().tab(RandomCrap.TAB)));
 
     //  ITEMS   \\
@@ -44,7 +43,6 @@ public class itemRegister {
     public static final RegistryObject<Item> RUBY_COMPOUND = ITEMS.register("ruby_compound", () -> new rubyCompound(new Item.Properties().tab(RandomCrap.TAB)));
 
     //   FOOD   \\
-
     public static final RegistryObject<Item> TATER_TOTS = ITEMS.register("tater_tots",
             () -> new Item(new Item.Properties().tab(RandomCrap.TAB).food(new Food.Builder().nutrition(20).fast().saturationMod(20)
                     .effect(() -> new EffectInstance(Effects.ABSORPTION, 600, 10), 100).effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 600, 10), 100).effect(() -> new EffectInstance(Effects.DAMAGE_RESISTANCE, 600, 10), 100)
