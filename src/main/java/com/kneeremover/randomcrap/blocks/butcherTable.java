@@ -19,27 +19,27 @@ import static com.kneeremover.randomcrap.util.crapLib.takeOne;
 
 @SuppressWarnings("deprecation")
 public class butcherTable extends Block {
-    public butcherTable(Properties properties) {
-        super(properties);
-    }
+	public butcherTable(Properties properties) {
+		super(properties);
+	}
 
-    @Override
-    public @NotNull ActionResultType use(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
-        if (!worldIn.isClientSide && player.getMainHandItem().getItem() == Items.BEEF) {
-                player.addItem(itemRegister.ANIMAL_FAT.get().getDefaultInstance());
-                takeOne((ServerPlayerEntity) player);
-        }
-        return ActionResultType.SUCCESS;
-    }
+	@Override
+	public @NotNull ActionResultType use(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
+		if (!worldIn.isClientSide && player.getMainHandItem().getItem() == Items.BEEF) {
+			player.addItem(itemRegister.ANIMAL_FAT.get().getDefaultInstance());
+			takeOne((ServerPlayerEntity) player);
+		}
+		return ActionResultType.SUCCESS;
+	}
 
 
-    @Override
-    public void attack(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player) {
-        if (!worldIn.isClientSide && player.getMainHandItem().getItem() == Items.BEEF) {
-            ItemStack animalFat = itemInstance(itemRegister.ENERGISED_STONE);
-            animalFat.setCount(player.getMainHandItem().getCount());
-            player.addItem(animalFat);
-            player.getMainHandItem().setCount(0);
-        }
-    }
+	@Override
+	public void attack(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player) {
+		if (!worldIn.isClientSide && player.getMainHandItem().getItem() == Items.BEEF) {
+			ItemStack animalFat = itemInstance(itemRegister.ENERGISED_STONE);
+			animalFat.setCount(player.getMainHandItem().getCount());
+			player.addItem(animalFat);
+			player.getMainHandItem().setCount(0);
+		}
+	}
 }

@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "randomcrap:block/butcher_table" }
+    "": {
+      "model": "randomcrap:block/butcher_table"
+    }
   }
 }

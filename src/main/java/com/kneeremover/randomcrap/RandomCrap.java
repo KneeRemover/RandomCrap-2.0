@@ -43,65 +43,65 @@ import static com.kneeremover.randomcrap.util.crapLib.modid;
 
 @Mod(modid)
 public class RandomCrap {
-    public static final Logger LOGGER = LogManager.getLogger();
-    public static final List<Item> tools = new ArrayList<>();
+	public static final Logger LOGGER = LogManager.getLogger();
+	public static final List<Item> tools = new ArrayList<>();
 
-    public RandomCrap() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
-        // Startup registration
-        eventBus.addListener(this::setup);
-        eventBus.addListener(this::doClientStuff);
+	public RandomCrap() {
+		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+		// Startup registration
+		eventBus.addListener(this::setup);
+		eventBus.addListener(this::doClientStuff);
 
-        // Forge event bus
-        //    Listeners
-        forgeEventBus.addListener(handheldWaystone::leftClick);
-        forgeEventBus.addListener(handheldWaystone::onWorldSave);
-        forgeEventBus.addListener(handheldWaystone::AnvilUpdateEvent);
-        forgeEventBus.addListener(kateBucket::click);
-        forgeEventBus.addListener(taterGenerator::click);
-        forgeEventBus.addListener(rocket::tick);
-        forgeEventBus.addListener(enchanter::click);
+		// Forge event bus
+		//    Listeners
+		forgeEventBus.addListener(handheldWaystone::leftClick);
+		forgeEventBus.addListener(handheldWaystone::onWorldSave);
+		forgeEventBus.addListener(handheldWaystone::AnvilUpdateEvent);
+		forgeEventBus.addListener(kateBucket::click);
+		forgeEventBus.addListener(taterGenerator::click);
+		forgeEventBus.addListener(rocket::tick);
+		forgeEventBus.addListener(enchanter::click);
 
-        //    Class Registries
-        forgeEventBus.register(this);
+		//    Class Registries
+		forgeEventBus.register(this);
 
-        // Mod event bus
-        blockRegister.register(eventBus);
-        itemRegister.register(eventBus);
+		// Mod event bus
+		blockRegister.register(eventBus);
+		itemRegister.register(eventBus);
 
-        eventBus.register(containerRegister.class);
-    }
+		eventBus.register(containerRegister.class);
+	}
 
-    private void setup(final FMLCommonSetupEvent event) {
-        PatchouliAPI.get().registerMultiblock(append("tater_cauldron"), TATER_CAULDRON.get());
-        PatchouliAPI.get().registerMultiblock(append("kate_bucket"), BUCKET_UPGRADER.get());
-        PatchouliAPI.get().registerMultiblock(append("enchanter"), STONE_ENERGISER.get());
-        main.init();
-        for (Item item : ForgeRegistries.ITEMS.getValues()) {
-            if (!item.getToolTypes(item.getItem().getDefaultInstance()).isEmpty()) {
-                tools.add(item);
-            }
-        }
-    }
+	private void setup(final FMLCommonSetupEvent event) {
+		PatchouliAPI.get().registerMultiblock(append("tater_cauldron"), TATER_CAULDRON.get());
+		PatchouliAPI.get().registerMultiblock(append("kate_bucket"), BUCKET_UPGRADER.get());
+		PatchouliAPI.get().registerMultiblock(append("enchanter"), STONE_ENERGISER.get());
+		main.init();
+		for (Item item : ForgeRegistries.ITEMS.getValues()) {
+			if (!item.getToolTypes(item.getItem().getDefaultInstance()).isEmpty()) {
+				tools.add(item);
+			}
+		}
+	}
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
-        ScreenManager.register(containerRegister.kateBucketContainer, screen::new);
-    }
+	private void doClientStuff(final FMLClientSetupEvent event) {
+		ScreenManager.register(containerRegister.kateBucketContainer, screen::new);
+	}
 
-    public static final ItemGroup TAB = new ItemGroup("crapTab") {
-        @Override
-        public @NotNull ItemStack makeIcon() {
-            return new ItemStack(itemRegister.RUBY.get());
-        }
-    };
+	public static final ItemGroup TAB = new ItemGroup("crapTab") {
+		@Override
+		public @NotNull ItemStack makeIcon() {
+			return new ItemStack(itemRegister.RUBY.get());
+		}
+	};
 
-    @SubscribeEvent
-    public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {
-        containerRegister.registerContainers(event);
-    }
+	@SubscribeEvent
+	public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {
+		containerRegister.registerContainers(event);
+	}
 
-    public Method test(Method method) {
-        return method;
-    }
+	public Method test(Method method) {
+		return method;
+	}
 }

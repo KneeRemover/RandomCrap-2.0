@@ -1,12 +1,12 @@
 {
-	"parent": "minecraft:block/cube",
-	"textures": {
-		"particle": "randomcrap:block/ruby_bookshelf",
-		"north": "randomcrap:block/ruby_bookshelf",
-		"south": "randomcrap:block/ruby_bookshelf",
-		"east": "randomcrap:block/ruby_bookshelf",
-		"west": "randomcrap:block/ruby_bookshelf",
-		"up": "randomcrap:block/ruby_planks",
-		"down": "randomcrap:block/ruby_planks"
-	}
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "randomcrap:block/ruby_bookshelf",
+    "north": "randomcrap:block/ruby_bookshelf",
+    "south": "randomcrap:block/ruby_bookshelf",
+    "east": "randomcrap:block/ruby_bookshelf",
+    "west": "randomcrap:block/ruby_bookshelf",
+    "up": "randomcrap:block/ruby_planks",
+    "down": "randomcrap:block/ruby_planks"
+  }
 }

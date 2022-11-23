@@ -1,6 +1,7 @@
 {
   "variants": {
-    "": { "model": "randomcrap:block/blue_hopper"
+    "": {
+      "model": "randomcrap:block/blue_hopper"
     }
   }
 }

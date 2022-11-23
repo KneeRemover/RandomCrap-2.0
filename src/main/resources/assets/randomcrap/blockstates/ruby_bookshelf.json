@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "randomcrap:block/ruby_bookshelf" }
+    "": {
+      "model": "randomcrap:block/ruby_bookshelf"
+    }
   }
 }

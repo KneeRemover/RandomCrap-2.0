@@ -18,10 +18,8 @@
   "item.randomcrap.energised_hoe": "Energised Hoe",
   "item.randomcrap.energised_sword": "Energised Sword",
   "item.randomcrap.ruby_compound": "Ruby Compound",
-
   "item.randomcrap.handheldWaystone.error.unsetPos": "No position has been set!",
   "item.randomcrap.handheldWaystone.setPos": "Position set!",
-
   "block.randomcrap.ruby_block": "Block of Ruby",
   "block.randomcrap.ruby_ore": "Ruby Ore",
   "block.randomcrap.oil_cauldron": "Cauldron of Animal Fat",
@@ -30,10 +28,8 @@
   "block.randomcrap.blue_hopper": "Infusion Hopper",
   "block.randomcrap.bucket_upgrade_station": "Bucket Upgrade Station",
   "block.randomcrap.ruby_bookshelf": "Ruby Bookshelf",
-
   "key.categories.rc": "RandomCrap 2.0",
   "itemGroup.crapTab": "RandomCrap 2.0",
-
   "event.randomcrap.multiblock.valid": "Structure valid!",
   "randomcrap.gui.katebucket": "Red Bucket"
 }

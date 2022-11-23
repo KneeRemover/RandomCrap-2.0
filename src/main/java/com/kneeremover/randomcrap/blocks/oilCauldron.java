@@ -20,19 +20,19 @@ import static com.kneeremover.randomcrap.util.crapLib.takeOne;
 
 @SuppressWarnings("deprecation")
 public class oilCauldron extends Block {
-    public oilCauldron(Properties properties) {
-        super(properties);
-    }
+	public oilCauldron(Properties properties) {
+		super(properties);
+	}
 
-    @Override
-    public @NotNull ActionResultType use(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
-        if (!worldIn.isClientSide) {
-            if (player.getMainHandItem().getItem().asItem() == Items.POTATO && taterGenerator.test(worldIn, pos, handIn)) {
-                takeOne((ServerPlayerEntity) player);
-                player.addItem(itemInstance(itemRegister.TATER_TOTS));
-                worldIn.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
-            }
-        }
-        return ActionResultType.SUCCESS;
-    }
+	@Override
+	public @NotNull ActionResultType use(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
+		if (!worldIn.isClientSide) {
+			if (player.getMainHandItem().getItem().asItem() == Items.POTATO && taterGenerator.test(worldIn, pos, handIn)) {
+				takeOne((ServerPlayerEntity) player);
+				player.addItem(itemInstance(itemRegister.TATER_TOTS));
+				worldIn.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
+			}
+		}
+		return ActionResultType.SUCCESS;
+	}
 }

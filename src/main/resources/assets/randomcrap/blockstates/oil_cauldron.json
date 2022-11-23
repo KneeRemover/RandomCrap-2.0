@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "randomcrap:block/oil_cauldron" }
+    "": {
+      "model": "randomcrap:block/oil_cauldron"
+    }
   }
 }

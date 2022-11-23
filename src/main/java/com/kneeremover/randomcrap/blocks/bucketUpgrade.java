@@ -16,18 +16,18 @@ import org.jetbrains.annotations.NotNull;
 import static com.kneeremover.randomcrap.util.crapLib.itemInstance;
 
 public class bucketUpgrade extends Block {
-    public bucketUpgrade(Properties properties) {
-        super(properties);
-    }
+	public bucketUpgrade(Properties properties) {
+		super(properties);
+	}
 
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public @NotNull ActionResultType use(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
-        if (!worldIn.isClientSide && player.getMainHandItem().getItem() == Items.BUCKET && kateBucket.test(worldIn, pos, handIn)) {
-                player.addItem(itemInstance(itemRegister.ENERGISED_STONE));
-                player.getMainHandItem().shrink(1);
-        }
-        return ActionResultType.SUCCESS;
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public @NotNull ActionResultType use(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
+		if (!worldIn.isClientSide && player.getMainHandItem().getItem() == Items.BUCKET && kateBucket.test(worldIn, pos, handIn)) {
+			player.addItem(itemInstance(itemRegister.ENERGISED_STONE));
+			player.getMainHandItem().shrink(1);
+		}
+		return ActionResultType.SUCCESS;
+	}
 }

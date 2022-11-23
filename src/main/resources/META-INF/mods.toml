@@ -1,23 +1,23 @@
-modLoader="javafml" #mandatory
-loaderVersion="[36,)" #mandatory
+modLoader = "javafml" #mandatory
+loaderVersion = "[36,)" #mandatory
 
-license="All rights reserved"
+license = "All rights reserved"
 
 [[mods]] #mandatory
 
-modId="randomcrap" #mandatory
+modId = "randomcrap" #mandatory
 
-version="1.16.5-1.0.0" #mandatory
+version = "1.16.5-1.0.0" #mandatory
 
-displayName="Random Crap 2.0" #mandatory
+displayName = "Random Crap 2.0" #mandatory
 
 #logoFile="examplemod.png" #optional
 
-credits="\nthanks so much to p1cklep1e for helping make a bunch of the textures!\n\nThanks to TechnoVision, Kaupenjoe, Tslat, and the modding discord for making this mod possible! \nUsing Waystone mod's ideas, licenced under https://creativecommons.org/licenses/by-sa/3.0/ \nLink back to the mod: https://www.curseforge.com/minecraft/mc-mods/waystones\n" #optional
+credits = "\nthanks so much to p1cklep1e for helping make a bunch of the textures!\n\nThanks to TechnoVision, Kaupenjoe, Tslat, and the modding discord for making this mod possible! \nUsing Waystone mod's ideas, licenced under https://creativecommons.org/licenses/by-sa/3.0/ \nLink back to the mod: https://www.curseforge.com/minecraft/mc-mods/waystones\n" #optional
 
-authors="KneeRemover" #optional
+authors = "KneeRemover" #optional
 # TODO crossbows suck!
-description='''
+description = '''
 A content mod focused around goals, along with some Random Crap thrown in along the way!
 Created by me, KneeRemover, because they were bored and wanted to add Random Crap to the game.
 Please report any bugs or glitches to Knee Remover#5224 on Discord
@@ -30,16 +30,16 @@ Yum taters :D
 
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.randomcrap]] #optional
-    # the modid of the dependency
-    modId="patchouli" #mandatory
-    # Does this dependency have to exist - if not, ordering below must be specified
-    mandatory=true #mandatory
-    # The version range of the dependency
-    versionRange="[1.16.4-53.1,)" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
-    ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
-    side="BOTH"
+# the modid of the dependency
+modId = "patchouli" #mandatory
+# Does this dependency have to exist - if not, ordering below must be specified
+mandatory = true #mandatory
+# The version range of the dependency
+versionRange = "[1.16.4-53.1,)" #mandatory
+# An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+ordering = "NONE"
+# Side this dependency is applied on - BOTH, CLIENT or SERVER
+side = "BOTH"
 ## Here's another dependency
 #[[dependencies.examplemod]]
 #    modId="minecraft"

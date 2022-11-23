@@ -30,152 +30,152 @@ import static com.kneeremover.randomcrap.RandomCrap.tools;
 
 public class item extends Item {
 
-    private static final int STACK_SIZE = 1;
+	private static final int STACK_SIZE = 1;
 
-    public item(Properties properties) {
-        super(properties.stacksTo(STACK_SIZE) // the item will appear on the Miscellaneous tab in creative
-        );
-    }
+	public item(Properties properties) {
+		super(properties.stacksTo(STACK_SIZE) // the item will appear on the Miscellaneous tab in creative
+		);
+	}
 
-    @Nonnull
-    @Override
-    public ActionResult<ItemStack> use(@NotNull World world, PlayerEntity player, @Nonnull Hand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (stack.getOrCreateTag().getBoolean("used")) {
-            int current = stack.getOrCreateTag().getInt("current");
-            if (player.isCrouching()) {
-                if (current < 3) {
-                    current++;
-                } else {
-                    current = 0;
-                }
-                stack.getOrCreateTag().putInt("current", current);
-            } else {
-                if (current == 0) refresh(stack, ToolType.PICKAXE, world);
-                if (current == 1) refresh(stack, ToolType.AXE, world);
-                if (current == 2) refresh(stack, ToolType.SHOVEL, world);
-                if (current == 3) refresh(stack, ToolType.HOE, world);
+	@Nonnull
+	@Override
+	public ActionResult<ItemStack> use(@NotNull World world, PlayerEntity player, @Nonnull Hand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (stack.getOrCreateTag().getBoolean("used")) {
+			int current = stack.getOrCreateTag().getInt("current");
+			if (player.isCrouching()) {
+				if (current < 3) {
+					current++;
+				} else {
+					current = 0;
+				}
+				stack.getOrCreateTag().putInt("current", current);
+			} else {
+				if (current == 0) refresh(stack, ToolType.PICKAXE, world);
+				if (current == 1) refresh(stack, ToolType.AXE, world);
+				if (current == 2) refresh(stack, ToolType.SHOVEL, world);
+				if (current == 3) refresh(stack, ToolType.HOE, world);
 
-                CompoundNBT nbt = stack.getOrCreateTag();
-                int dirtyCounter = nbt.getInt("dirtyCounter");
-                nbt.putInt("dirtyCounter", dirtyCounter + 1);
-                stack.setTag(nbt);
+				CompoundNBT nbt = stack.getOrCreateTag();
+				int dirtyCounter = nbt.getInt("dirtyCounter");
+				nbt.putInt("dirtyCounter", dirtyCounter + 1);
+				stack.setTag(nbt);
 
-                if (!world.isClientSide) {  // server only!
-                    INamedContainerProvider containerProviderBucket = new ContainerProviderBucket(this, stack);
-                    final int NUMBER_OF_FLOWER_SLOTS = 16;
-                    NetworkHooks.openGui((ServerPlayerEntity) player,
-                            containerProviderBucket,
-                            (packetBuffer) -> packetBuffer.writeInt(NUMBER_OF_FLOWER_SLOTS));
-                }
-            }
-        } else {
-            stack.getOrCreateTag().putBoolean("used", true);
-        }
-        return ActionResult.success(stack);
-    }
+				if (!world.isClientSide) {  // server only!
+					INamedContainerProvider containerProviderBucket = new ContainerProviderBucket(this, stack);
+					final int NUMBER_OF_FLOWER_SLOTS = 16;
+					NetworkHooks.openGui((ServerPlayerEntity) player,
+							containerProviderBucket,
+							(packetBuffer) -> packetBuffer.writeInt(NUMBER_OF_FLOWER_SLOTS));
+				}
+			}
+		} else {
+			stack.getOrCreateTag().putBoolean("used", true);
+		}
+		return ActionResult.success(stack);
+	}
 
-    private static class ContainerProviderBucket implements INamedContainerProvider {
-        public ContainerProviderBucket(item item, ItemStack itemStackBucket) {
-            this.itemStackBucket = itemStackBucket;
-        }
+	private static class ContainerProviderBucket implements INamedContainerProvider {
+		public ContainerProviderBucket(item item, ItemStack itemStackBucket) {
+			this.itemStackBucket = itemStackBucket;
+		}
 
-        @Override
-        public @NotNull ITextComponent getDisplayName() {
-            return itemStackBucket.getDisplayName();
-        }
+		@Override
+		public @NotNull ITextComponent getDisplayName() {
+			return itemStackBucket.getDisplayName();
+		}
 
-        @Override
-        public container createMenu(int windowID, @NotNull PlayerInventory playerInventory, @NotNull PlayerEntity playerEntity) {
-            return container.createContainerServerSide(windowID, playerInventory,
-                    getItemStackHandler(itemStackBucket),
-                    itemStackBucket);
-        }
+		@Override
+		public container createMenu(int windowID, @NotNull PlayerInventory playerInventory, @NotNull PlayerEntity playerEntity) {
+			return container.createContainerServerSide(windowID, playerInventory,
+					getItemStackHandler(itemStackBucket),
+					itemStackBucket);
+		}
 
-        private final ItemStack itemStackBucket;
-    }
+		private final ItemStack itemStackBucket;
+	}
 
-    // ---------------- Code related to Capabilities
-    //
+	// ---------------- Code related to Capabilities
+	//
 
-    // The CapabilityProvider returned from this method is used to specify which capabilities the ItemBucket possesses
-    @Nonnull
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT oldCapNbt) {
+	// The CapabilityProvider returned from this method is used to specify which capabilities the ItemBucket possesses
+	@Nonnull
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT oldCapNbt) {
 
-        return new capabilityProvider();
-    }
+		return new capabilityProvider();
+	}
 
-    private static itemStackHandler getItemStackHandler(ItemStack itemStack) {
-        @SuppressWarnings("ConstantConditions") IItemHandler itemStackHandler = itemStack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
-        if (!(itemStackHandler instanceof itemStackHandler)) {
-            LOGGER.error("ItemBucket did not have the expected ITEM_HANDLER_CAPABILITY");
-            return new itemStackHandler(1);
-        }
-        return (itemStackHandler) itemStackHandler;
-    }
+	private static itemStackHandler getItemStackHandler(ItemStack itemStack) {
+		@SuppressWarnings("ConstantConditions") IItemHandler itemStackHandler = itemStack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
+		if (!(itemStackHandler instanceof itemStackHandler)) {
+			LOGGER.error("ItemBucket did not have the expected ITEM_HANDLER_CAPABILITY");
+			return new itemStackHandler(1);
+		}
+		return (itemStackHandler) itemStackHandler;
+	}
 
-    private final String BASE_NBT_TAG = "base";
-    private final String CAPABILITY_NBT_TAG = "cap";
+	private final String BASE_NBT_TAG = "base";
+	private final String CAPABILITY_NBT_TAG = "cap";
 
-    // Refresh the inventory with whatever item type it needs
-    public static List<Item> bucketTools;
+	// Refresh the inventory with whatever item type it needs
+	public static List<Item> bucketTools;
 
-    public static void refresh(ItemStack stack, ToolType toolType, World world) {
-        if (!world.isClientSide) {     // Only server side, of course.
-            bucketTools = new ArrayList<>();    // Reset the tools container
-            for (Item item : tools) {           // Cycle through all the tools
-                if (item.getToolTypes(item.getItem().getDefaultInstance()).contains(toolType))
-                    bucketTools.add(item);   // Match to tooltype
-            }
+	public static void refresh(ItemStack stack, ToolType toolType, World world) {
+		if (!world.isClientSide) {     // Only server side, of course.
+			bucketTools = new ArrayList<>();    // Reset the tools container
+			for (Item item : tools) {           // Cycle through all the tools
+				if (item.getToolTypes(item.getItem().getDefaultInstance()).contains(toolType))
+					bucketTools.add(item);   // Match to tooltype
+			}
 
-            itemStackHandler itemStackHandler = item.getItemStackHandler(stack);
-            for (int i = 0; i < 54; i++) {
-                itemStackHandler.setStackInSlot(i, Items.AIR.getDefaultInstance());
-            } // Reset the inventory
+			itemStackHandler itemStackHandler = item.getItemStackHandler(stack);
+			for (int i = 0; i < 54; i++) {
+				itemStackHandler.setStackInSlot(i, Items.AIR.getDefaultInstance());
+			} // Reset the inventory
 
-            for (int i = 0; i < bucketTools.size(); i++) {
-                if (i < 54) {
-                    itemStackHandler.setStackInSlot(i, bucketTools.get(i).getDefaultInstance());
-                }
-            } // Add all the tools
-        }
-    }
+			for (int i = 0; i < bucketTools.size(); i++) {
+				if (i < 54) {
+					itemStackHandler.setStackInSlot(i, bucketTools.get(i).getDefaultInstance());
+				}
+			} // Add all the tools
+		}
+	}
 
-    @Nullable
-    @Override
-    public CompoundNBT getShareTag(ItemStack stack) {
-        CompoundNBT baseTag = stack.getTag();
-        itemStackHandler itemStackHandler = getItemStackHandler(stack);
-        CompoundNBT capabilityTag = itemStackHandler.serializeNBT();
-        CompoundNBT combinedTag = new CompoundNBT();
-        if (baseTag != null) {
-            combinedTag.put(BASE_NBT_TAG, baseTag);
-        }
-        if (capabilityTag != null) {
-            combinedTag.put(CAPABILITY_NBT_TAG, capabilityTag);
-        }
-        return combinedTag;
-    }
+	@Nullable
+	@Override
+	public CompoundNBT getShareTag(ItemStack stack) {
+		CompoundNBT baseTag = stack.getTag();
+		itemStackHandler itemStackHandler = getItemStackHandler(stack);
+		CompoundNBT capabilityTag = itemStackHandler.serializeNBT();
+		CompoundNBT combinedTag = new CompoundNBT();
+		if (baseTag != null) {
+			combinedTag.put(BASE_NBT_TAG, baseTag);
+		}
+		if (capabilityTag != null) {
+			combinedTag.put(CAPABILITY_NBT_TAG, capabilityTag);
+		}
+		return combinedTag;
+	}
 
-    /**
-     * Retrieve our capability information from the transmitted NBT information
-     *
-     * @param stack The stack that received NBT
-     * @param nbt   Received NBT, can be null
-     */
-    @Override
-    public void readShareTag(ItemStack stack, @Nullable CompoundNBT nbt) {
-        if (nbt == null) {
-            stack.setTag(null);
-            return;
-        }
-        CompoundNBT baseTag = nbt.getCompound(BASE_NBT_TAG);              // empty if not found
-        CompoundNBT capabilityTag = nbt.getCompound(CAPABILITY_NBT_TAG); // empty if not found
-        stack.setTag(baseTag);
-        itemStackHandler itemStackHandler = getItemStackHandler(stack);
-        itemStackHandler.deserializeNBT(capabilityTag);
-    }
+	/**
+	 * Retrieve our capability information from the transmitted NBT information
+	 *
+	 * @param stack The stack that received NBT
+	 * @param nbt   Received NBT, can be null
+	 */
+	@Override
+	public void readShareTag(ItemStack stack, @Nullable CompoundNBT nbt) {
+		if (nbt == null) {
+			stack.setTag(null);
+			return;
+		}
+		CompoundNBT baseTag = nbt.getCompound(BASE_NBT_TAG);              // empty if not found
+		CompoundNBT capabilityTag = nbt.getCompound(CAPABILITY_NBT_TAG); // empty if not found
+		stack.setTag(baseTag);
+		itemStackHandler itemStackHandler = getItemStackHandler(stack);
+		itemStackHandler.deserializeNBT(capabilityTag);
+	}
 
-    private static final Logger LOGGER = LogManager.getLogger();
+	private static final Logger LOGGER = LogManager.getLogger();
 }

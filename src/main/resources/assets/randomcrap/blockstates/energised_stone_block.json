@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "randomcrap:block/energised_stone_block" }
+    "": {
+      "model": "randomcrap:block/energised_stone_block"
+    }
   }
 }

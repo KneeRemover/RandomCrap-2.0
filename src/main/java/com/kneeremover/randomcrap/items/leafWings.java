@@ -11,21 +11,21 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 public class leafWings extends Item {
-    public leafWings(Properties properties) {
-        super(properties);
-    }
+	public leafWings(Properties properties) {
+		super(properties);
+	}
 
-    @Override
-    public @NotNull ActionResult<ItemStack> use(World world, PlayerEntity player, @NotNull Hand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (!world.isClientSide) {
-            if (!player.abilities.instabuild) {
-                stack.shrink(1);
-            }
-            player.fallDistance = 0;
-            player.setDeltaMovement(Vector3d.directionFromRotation(player.getRotationVector()).normalize().multiply(3, 3, 3));
-            player.hurtMarked = true;
-        }
-        return ActionResult.sidedSuccess(stack, world.isClientSide());
-    }
+	@Override
+	public @NotNull ActionResult<ItemStack> use(World world, PlayerEntity player, @NotNull Hand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (!world.isClientSide) {
+			if (!player.abilities.instabuild) {
+				stack.shrink(1);
+			}
+			player.fallDistance = 0;
+			player.setDeltaMovement(Vector3d.directionFromRotation(player.getRotationVector()).normalize().multiply(3, 3, 3));
+			player.hurtMarked = true;
+		}
+		return ActionResult.sidedSuccess(stack, world.isClientSide());
+	}
 }

@@ -14,23 +14,23 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import java.util.Objects;
 
 public class ModOreGeneration {
-    public static void generatoeOres(final BiomeLoadingEvent event) {
-        for (OreType ore : OreType.values()) {
-            OreFeatureConfig ofc = new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                    ore.getBlock().get().defaultBlockState(), ore.getMaxVeinSize()
-            );
-            ConfiguredPlacement<TopSolidRangeConfig> configuredPlacement = Placement.RANGE.configured(
-                    new TopSolidRangeConfig(ore.getMinHeight(), ore.getMinHeight(), ore.getMaxHeight())
-            );
+	public static void generatoeOres(final BiomeLoadingEvent event) {
+		for (OreType ore : OreType.values()) {
+			OreFeatureConfig ofc = new OreFeatureConfig(
+					OreFeatureConfig.FillerBlockType.NATURAL_STONE,
+					ore.getBlock().get().defaultBlockState(), ore.getMaxVeinSize()
+			);
+			ConfiguredPlacement<TopSolidRangeConfig> configuredPlacement = Placement.RANGE.configured(
+					new TopSolidRangeConfig(ore.getMinHeight(), ore.getMinHeight(), ore.getMaxHeight())
+			);
 
-            ConfiguredFeature<?, ?> oreFeature = registerOreFeature(ore, ofc, configuredPlacement);
+			ConfiguredFeature<?, ?> oreFeature = registerOreFeature(ore, ofc, configuredPlacement);
 
-            event.getGeneration().addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, oreFeature);
-        }
-    }
+			event.getGeneration().addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, oreFeature);
+		}
+	}
 
-    private static ConfiguredFeature<?, ?> registerOreFeature(OreType ore, OreFeatureConfig oreFeatureConfig, ConfiguredPlacement configuredPlacement) {
-        return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, Objects.requireNonNull(Objects.requireNonNull(ore.getBlock().get().getRegistryName())), Feature.ORE.configured(oreFeatureConfig).decorated(configuredPlacement).squared().count(ore.getMaxVeinSize()));
-    }
+	private static ConfiguredFeature<?, ?> registerOreFeature(OreType ore, OreFeatureConfig oreFeatureConfig, ConfiguredPlacement configuredPlacement) {
+		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, Objects.requireNonNull(Objects.requireNonNull(ore.getBlock().get().getRegistryName())), Feature.ORE.configured(oreFeatureConfig).decorated(configuredPlacement).squared().count(ore.getMaxVeinSize()));
+	}
 }
