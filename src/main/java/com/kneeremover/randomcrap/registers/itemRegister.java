@@ -35,12 +35,13 @@ public class itemRegister {
 	public static final RegistryObject<Item> TELEPORTATION_CORE = ITEMS.register("teleportation_core", () -> new Item(new Item.Properties().tab(RandomCrap.TAB)));
 	public static final RegistryObject<Item> RUBY = ITEMS.register("ruby", () -> new Item(new Item.Properties().tab(RandomCrap.TAB)));
 	public static final RegistryObject<Item> HANDHELD_WAYSTONE = ITEMS.register("handheld_waystone", () -> new handheldWaystone(new Item.Properties().tab(RandomCrap.TAB)));
-	public static final RegistryObject<Item> ROCKET_SHIP = ITEMS.register("rocket_ship", () -> new rocket(new Item.Properties().tab(RandomCrap.TAB)));
+	//public static final RegistryObject<Item> ROCKET_SHIP = ITEMS.register("rocket_ship", () -> new rocket(new Item.Properties().tab(RandomCrap.TAB)));
 	public static final RegistryObject<Item> ANIMAL_FAT = ITEMS.register("animal_fat", () -> new animalFat(new Item.Properties().tab(RandomCrap.TAB)));
 	public static final RegistryObject<Item> STOPWATCH = ITEMS.register("stopwatch", () -> new clock(new Item.Properties().tab(RandomCrap.TAB)));
 	public static final RegistryObject<Item> KATE_BUCKET = ITEMS.register("kate_bucket", () -> new item(new Item.Properties().tab(RandomCrap.TAB)));
 	public static final RegistryObject<Item> LEAF_WINGS = ITEMS.register("leaf_wings", () -> new leafWings(new Item.Properties().tab(RandomCrap.TAB)));
 	public static final RegistryObject<Item> RUBY_COMPOUND = ITEMS.register("ruby_compound", () -> new rubyCompound(new Item.Properties().tab(RandomCrap.TAB)));
+	public static final RegistryObject<Item> BASIL = ITEMS.register("basil", () -> new basil(new Item.Properties().tab(RandomCrap.TAB)));
 
 	//   FOOD   \\
 	public static final RegistryObject<Item> TATER_TOTS = ITEMS.register("tater_tots",
