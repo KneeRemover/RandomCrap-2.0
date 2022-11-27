@@ -16,13 +16,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
-import static com.kneeremover.randomcrap.util.crapLib.modid;
+import static com.kneeremover.randomcrap.util.crapLib.MODID;
 
 public class blockRegister {
 	static final AbstractBlock.IPositionPredicate returnFalse = (p_test_1_, p_test_2_, p_test_3_) -> false;
 
 	public static final DeferredRegister<Block> BLOCKS
-			= DeferredRegister.create(ForgeRegistries.BLOCKS, modid);
+			= DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
 
 	public static final RegistryObject<Block> RUBY_BLOCK = registerBlock("ruby_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE).harvestLevel(2).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(5f)));
 	public static final RegistryObject<Block> RUBY_ORE = registerBlock("ruby_ore", () -> new Block(AbstractBlock.Properties.of(Material.METAL).harvestLevel(2).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(2f)));

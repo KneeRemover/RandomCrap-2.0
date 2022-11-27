@@ -7,7 +7,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 
-import static com.kneeremover.randomcrap.util.crapLib.modid;
+import static com.kneeremover.randomcrap.util.crapLib.MODID;
 
 public class tags {
 
@@ -17,7 +17,7 @@ public class tags {
 				createTag();
 
 		private static Tags.IOptionalNamedTag<Block> createTag() {
-			return BlockTags.createOptional(new ResourceLocation(modid, "tater_cauldron"));
+			return BlockTags.createOptional(new ResourceLocation(MODID, "tater_cauldron"));
 		}
 
 		private static Tags.IOptionalNamedTag<Block> createForgeTag(String name) {
@@ -30,7 +30,7 @@ public class tags {
 		public static final Tags.IOptionalNamedTag<Item> AMETHYST = createForgeTag();
 
 		private static Tags.IOptionalNamedTag<Item> createTag(String name) {
-			return ItemTags.createOptional(new ResourceLocation(modid, name));
+			return ItemTags.createOptional(new ResourceLocation(MODID, name));
 		}
 
 		private static Tags.IOptionalNamedTag<Item> createForgeTag() {

@@ -12,10 +12,10 @@ import net.minecraftforge.fml.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 public class crapLib {
-	public static final String modid = "randomcrap";
+	public static final String MODID = "randomcrap";
 
 	public static @NotNull ResourceLocation append(String string) {
-		return new ResourceLocation(modid, string);
+		return new ResourceLocation(MODID, string);
 	}
 
 	public static @NotNull ItemStack itemInstance(@NotNull RegistryObject<Item> rItem) {

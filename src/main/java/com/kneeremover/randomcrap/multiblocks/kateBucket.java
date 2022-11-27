@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 import static com.kneeremover.randomcrap.util.crapLib.*;
 import static net.minecraft.util.Hand.MAIN_HAND;
 
-@Mod.EventBusSubscriber(modid = modid)
+@Mod.EventBusSubscriber(modid = MODID)
 public class kateBucket {
 	public static final Supplier<IMultiblock> BUCKET_UPGRADER = Suppliers.memoize(() -> PatchouliAPI.get().makeMultiblock(
 			new String[][]{

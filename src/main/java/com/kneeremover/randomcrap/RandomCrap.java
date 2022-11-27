@@ -3,7 +3,6 @@ package com.kneeremover.randomcrap;
 
 import com.kneeremover.randomcrap.items.handheldWaystone;
 import com.kneeremover.randomcrap.items.kateBucket.screen;
-import com.kneeremover.randomcrap.items.rocket;
 import com.kneeremover.randomcrap.multiblocks.enchanter;
 import com.kneeremover.randomcrap.multiblocks.kateBucket;
 import com.kneeremover.randomcrap.multiblocks.taterGenerator;
@@ -37,11 +36,11 @@ import java.util.List;
 import static com.kneeremover.randomcrap.multiblocks.enchanter.STONE_ENERGISER;
 import static com.kneeremover.randomcrap.multiblocks.kateBucket.BUCKET_UPGRADER;
 import static com.kneeremover.randomcrap.multiblocks.taterGenerator.TATER_CAULDRON;
+import static com.kneeremover.randomcrap.util.crapLib.MODID;
 import static com.kneeremover.randomcrap.util.crapLib.append;
-import static com.kneeremover.randomcrap.util.crapLib.modid;
 
 
-@Mod(modid)
+@Mod(MODID)
 public class RandomCrap {
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final List<Item> tools = new ArrayList<>();
@@ -60,7 +59,7 @@ public class RandomCrap {
 		forgeEventBus.addListener(handheldWaystone::AnvilUpdateEvent);
 		forgeEventBus.addListener(kateBucket::click);
 		forgeEventBus.addListener(taterGenerator::click);
-		forgeEventBus.addListener(rocket::tick);
+		//forgeEventBus.addListener(rocket::tick);
 		forgeEventBus.addListener(enchanter::click);
 
 		//    Class Registries

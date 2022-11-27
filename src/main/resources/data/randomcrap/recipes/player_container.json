@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "-#-",
+    "#$#",
+    "-#-"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "$": {
+      "item": "randomcrap:teleportation_core"
+    },
+    "-": {
+      "item": "randomcrap:ruby"
+    }
+  },
+  "result": {
+    "item": "randomcrap:player_container"
+  }
+}

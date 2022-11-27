@@ -5,9 +5,9 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import static com.kneeremover.randomcrap.util.crapLib.modid;
+import static com.kneeremover.randomcrap.util.crapLib.MODID;
 
-@Mod.EventBusSubscriber(modid = modid)
+@Mod.EventBusSubscriber(modid = MODID)
 public class ModWorldEvents {
 
 	@SubscribeEvent

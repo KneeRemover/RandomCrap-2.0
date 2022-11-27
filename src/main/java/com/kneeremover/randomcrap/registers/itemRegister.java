@@ -12,12 +12,12 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import static com.kneeremover.randomcrap.util.crapLib.modid;
+import static com.kneeremover.randomcrap.util.crapLib.MODID;
 
 
 public class itemRegister {
 	public static final DeferredRegister<Item> ITEMS =
-			DeferredRegister.create(ForgeRegistries.ITEMS, modid);
+			DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
 	//  TOOLS   \\
 	public static final RegistryObject<Item> ENERGISED_PICKAXE = ITEMS.register("energised_pickaxe", () -> new PickaxeItem(itemTiers.ENERGISED, 0, 0, new Item.Properties().tab(RandomCrap.TAB)));
@@ -41,7 +41,8 @@ public class itemRegister {
 	public static final RegistryObject<Item> KATE_BUCKET = ITEMS.register("kate_bucket", () -> new item(new Item.Properties().tab(RandomCrap.TAB)));
 	public static final RegistryObject<Item> LEAF_WINGS = ITEMS.register("leaf_wings", () -> new leafWings(new Item.Properties().tab(RandomCrap.TAB)));
 	public static final RegistryObject<Item> RUBY_COMPOUND = ITEMS.register("ruby_compound", () -> new rubyCompound(new Item.Properties().tab(RandomCrap.TAB)));
-	public static final RegistryObject<Item> BASIL = ITEMS.register("basil", () -> new basil(new Item.Properties().tab(RandomCrap.TAB)));
+	public static final RegistryObject<Item> BASIL = ITEMS.register("basil", () -> new basil(new Item.Properties().tab(RandomCrap.TAB).stacksTo(143)));
+	public static final RegistryObject<Item> PLAYER_CONTAINER = ITEMS.register("player_container", () -> new playerContainer(new Item.Properties().tab(RandomCrap.TAB)));
 
 	//   FOOD   \\
 	public static final RegistryObject<Item> TATER_TOTS = ITEMS.register("tater_tots",

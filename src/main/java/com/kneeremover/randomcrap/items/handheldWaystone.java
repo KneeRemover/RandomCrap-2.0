@@ -51,7 +51,7 @@ public class handheldWaystone extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
-		int slots = stack.getOrCreateTag().getInt("maxSlots");
+		int slots = stack.getOrCreateTag().getInt("randomcrap.maxSlots");
 		if (slots == 0) {
 			slots = 1;
 		}
@@ -138,7 +138,7 @@ public class handheldWaystone extends Item {
 
 				// TODO This isn't actually a todo, but IDEs will highlight it, so you people will see it. Below is a way to TRANSFORM A STRING INTO A REGISTRY KEY.
 				// TODO Use this for storing dimensions in NBT.
-				ResourceLocation dimLoc = new ResourceLocation(nbt.getString("dim" + slot));
+				ResourceLocation dimLoc = new ResourceLocation(nbt.getString("randomcrap.dim" + slot));
 				RegistryKey<World> rk = RegistryKey.create(Registry.DIMENSION_REGISTRY, dimLoc);
 				ServerWorld dim = dimensions.get(rk);
 				serverPlayer.teleportTo(dim, x, y, z, 0, 0);
