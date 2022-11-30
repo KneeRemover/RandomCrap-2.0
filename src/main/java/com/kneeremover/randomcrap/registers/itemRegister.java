@@ -2,8 +2,9 @@ package com.kneeremover.randomcrap.registers;
 
 import com.kneeremover.randomcrap.RandomCrap;
 import com.kneeremover.randomcrap.items.*;
+import com.kneeremover.randomcrap.items.kateBucket.armorTiers;
 import com.kneeremover.randomcrap.items.kateBucket.item;
-import com.kneeremover.randomcrap.items.itemTiers;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -24,6 +25,12 @@ public class itemRegister {
 	public static final RegistryObject<Item> ENERGISED_AXE = ITEMS.register("energised_axe", () -> new AxeItem(itemTiers.ENERGISED, 0, 0, new Item.Properties().tab(RandomCrap.TAB)));
 	public static final RegistryObject<Item> ENERGISED_SHOVEL = ITEMS.register("energised_shovel", () -> new ShovelItem(itemTiers.ENERGISED, 0, 0, new Item.Properties().tab(RandomCrap.TAB)));
 	public static final RegistryObject<Item> ENERGISED_HOE = ITEMS.register("energised_hoe", () -> new HoeItem(itemTiers.ENERGISED, 0, 0, new Item.Properties().tab(RandomCrap.TAB)));
+
+	//  ARMR    \\
+	public static final RegistryObject<Item> ENERGISED_HELMET = ITEMS.register("energised_helmet", () -> new ArmorItem(armorTiers.ENERGISED, EquipmentSlotType.HEAD, new Item.Properties().tab(RandomCrap.TAB)));
+	public static final RegistryObject<Item> ENERGISED_CHESTPLATE = ITEMS.register("energised_chestplate", () -> new ArmorItem(armorTiers.ENERGISED, EquipmentSlotType.CHEST, new Item.Properties().tab(RandomCrap.TAB)));
+	public static final RegistryObject<Item> ENERGISED_LEGGINGS = ITEMS.register("energised_leggings", () -> new ArmorItem(armorTiers.ENERGISED, EquipmentSlotType.LEGS, new Item.Properties().tab(RandomCrap.TAB)));
+	public static final RegistryObject<Item> ENERGISED_BOOTS = ITEMS.register("energised_boots", () -> new ArmorItem(armorTiers.ENERGISED, EquipmentSlotType.FEET, new Item.Properties().tab(RandomCrap.TAB)));
 
 	//  WPNS    \\
 	public static final RegistryObject<Item> ENERGISED_SWORD = ITEMS.register("energised_sword", () -> new SwordItem(itemTiers.ENERGISED, 10, 6, new Item.Properties().tab(RandomCrap.TAB)));
