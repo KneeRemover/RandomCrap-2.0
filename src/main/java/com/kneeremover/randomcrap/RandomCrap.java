@@ -3,6 +3,7 @@ package com.kneeremover.randomcrap;
 
 import com.kneeremover.randomcrap.items.handheldWaystone;
 import com.kneeremover.randomcrap.items.kateBucket.screen;
+import com.kneeremover.randomcrap.items.secondMouth;
 import com.kneeremover.randomcrap.multiblocks.enchanter;
 import com.kneeremover.randomcrap.multiblocks.kateBucket;
 import com.kneeremover.randomcrap.multiblocks.taterGenerator;
@@ -61,6 +62,7 @@ public class RandomCrap {
 		forgeEventBus.addListener(taterGenerator::click);
 		//forgeEventBus.addListener(rocket::tick);
 		forgeEventBus.addListener(enchanter::click);
+		forgeEventBus.addListener(secondMouth::tick);
 
 		//    Class Registries
 		forgeEventBus.register(this);

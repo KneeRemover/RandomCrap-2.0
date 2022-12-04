@@ -3,6 +3,7 @@ package com.kneeremover.randomcrap.registers;
 import com.kneeremover.randomcrap.RandomCrap;
 import com.kneeremover.randomcrap.blocks.butcherTable;
 import com.kneeremover.randomcrap.blocks.oilCauldron;
+import com.kneeremover.randomcrap.blocks.rubyBookshelf;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -24,7 +25,7 @@ public class blockRegister {
 	public static final DeferredRegister<Block> BLOCKS
 			= DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
 
-	public static final RegistryObject<Block> RUBY_BLOCK = registerBlock("ruby_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE).harvestLevel(2).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(5f)));
+	public static final RegistryObject<Block> RUBY_BLOCK = registerBlock("ruby_block", () -> new rubyBookshelf(AbstractBlock.Properties.of(Material.STONE).harvestLevel(2).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(5f)));
 	public static final RegistryObject<Block> RUBY_ORE = registerBlock("ruby_ore", () -> new Block(AbstractBlock.Properties.of(Material.METAL).harvestLevel(2).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(2f)));
 	public static final RegistryObject<Block> RUBY_BOOKSHELF = registerBlock("ruby_bookshelf", () -> new Block(AbstractBlock.Properties.of(Material.WOOD).harvestLevel(2).harvestTool(ToolType.AXE).strength(1f)));
 	public static final RegistryObject<Block> OIL_CAULDRON = registerBlock("oil_cauldron", () -> new oilCauldron(AbstractBlock.Properties.of(Material.METAL).harvestLevel(0).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(2f).noOcclusion()));

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " GG",
+    "GBB",
+    " GG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "H": {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "result": {
+    "item": "randomcrap:second_mouth"
+  }
+}

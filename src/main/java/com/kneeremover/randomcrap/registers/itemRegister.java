@@ -2,8 +2,8 @@ package com.kneeremover.randomcrap.registers;
 
 import com.kneeremover.randomcrap.RandomCrap;
 import com.kneeremover.randomcrap.items.*;
-import com.kneeremover.randomcrap.items.kateBucket.armorTiers;
 import com.kneeremover.randomcrap.items.kateBucket.item;
+import com.kneeremover.randomcrap.items.secondMouth;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
@@ -50,6 +50,7 @@ public class itemRegister {
 	public static final RegistryObject<Item> RUBY_COMPOUND = ITEMS.register("ruby_compound", () -> new rubyCompound(new Item.Properties().tab(RandomCrap.TAB)));
 	public static final RegistryObject<Item> BASIL = ITEMS.register("basil", () -> new basil(new Item.Properties().tab(RandomCrap.TAB).stacksTo(143)));
 	public static final RegistryObject<Item> PLAYER_CONTAINER = ITEMS.register("player_container", () -> new playerContainer(new Item.Properties().tab(RandomCrap.TAB)));
+	public static final RegistryObject<Item> SECOND_MOUTH = ITEMS.register("second_mouth", () -> new secondMouth(new Item.Properties().tab(RandomCrap.TAB)));
 
 	//   FOOD   \\
 	public static final RegistryObject<Item> TATER_TOTS = ITEMS.register("tater_tots",

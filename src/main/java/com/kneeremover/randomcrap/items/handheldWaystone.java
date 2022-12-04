@@ -2,6 +2,7 @@ package com.kneeremover.randomcrap.items;
 
 
 import com.kneeremover.randomcrap.registers.itemRegister;
+import com.kneeremover.randomcrap.util.crapLib;
 import com.kneeremover.randomcrap.util.network.main;
 import com.kneeremover.randomcrap.util.network.message.leftClick;
 import net.minecraft.client.util.ITooltipFlag;
@@ -14,6 +15,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -33,8 +35,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
-
-import static com.kneeremover.randomcrap.RandomCrap.LOGGER;
 
 public class handheldWaystone extends Item {
 	public handheldWaystone(Properties properties) {
@@ -66,12 +66,19 @@ public class handheldWaystone extends Item {
 		return ActionResult.success(event.getItemStack());
 	}
 
+	@Override
+	public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, PlayerEntity player) {
+		if (!player.level.isClientSide) {
+			leftClickPacket(itemstack, (ServerPlayerEntity) player);
+		}
+		return super.onBlockStartBreak(itemstack, pos, player);
+	}
+
 	public static void leftClickPacket(ItemStack stack, ServerPlayerEntity player) {
 		if (stack.getItem() instanceof handheldWaystone && !player.getCooldowns().isOnCooldown(itemRegister.HANDHELD_WAYSTONE.get())) {
-			player.getCooldowns().addCooldown(itemRegister.HANDHELD_WAYSTONE.get(), 20);
+			player.getCooldowns().addCooldown(itemRegister.HANDHELD_WAYSTONE.get(), 5);
 			CompoundNBT nbt = stack.getOrCreateTag();
 			int slot = nbt.getInt("randomcrap.slot");
-
 			if (slot == 0) {
 				slot = 1;
 				nbt.putInt("randomcrap.slot", 1);
@@ -79,20 +86,14 @@ public class handheldWaystone extends Item {
 			if (nbt.getInt("randomcrap.maxSlots") == 0) {
 				nbt.putInt("randomcrap.maxSlots", 1);
 			}
-			stack.setTag(nbt); // if 0 make 1
-
-			if (slot >= nbt.getInt("randomcrap.maxSlots")) {
-				LOGGER.info("Looping around because slot is " + slot + " and maxSlots is " + nbt.getInt("randomcrap.maxSlots"));
-				slot = 1;
-				nbt.putInt("randomcrap.slot", 1);
+			if (player.isCrouching()) {
+				nbt.putInt("randomcrap.slot", crapLib.cycleMinus(nbt.getInt("randomcrap.slot"), 1, nbt.getInt("randomcrap.maxSlots")));
 			} else {
-				LOGGER.info("Incrementing slots from " + slot + " to " + (slot + 1));
-				slot++;
-				nbt.putInt("randomcrap.slot", slot);
+				nbt.putInt("randomcrap.slot", crapLib.cyclePlus(nbt.getInt("randomcrap.slot"), 1, nbt.getInt("randomcrap.maxSlots")));
 			}
+			stack.setHoverName(new StringTextComponent(new TranslationTextComponent("item.randomcrap.handheld_waystone").getString() + " - " + slot));
 			stack.setTag(nbt);
-			assert player != null;
-			((PlayerEntity) player).displayClientMessage(new StringTextComponent(new TranslationTextComponent("item.randomcrap.handheldWaystone.slot").getString() + slot), true);
+			((PlayerEntity) player).displayClientMessage(new StringTextComponent( new TranslationTextComponent("item.randomcrap.handheldWaystone.slot").getString() + slot), true);
 			player.setItemInHand(Hand.MAIN_HAND, stack);
 		}
 	}

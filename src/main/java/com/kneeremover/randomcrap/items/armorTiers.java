@@ -1,4 +1,4 @@
-package com.kneeremover.randomcrap.items.kateBucket;
+package com.kneeremover.randomcrap.items;
 
 import com.kneeremover.randomcrap.registers.itemRegister;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.function.Supplier;
 
 public enum armorTiers implements IArmorMaterial {
-	ENERGISED("energised", 37, new int[]{10, 12, 16, 6}, 30, SoundEvents.ARMOR_EQUIP_NETHERITE, 6.0F, 0.2F, () -> Ingredient.of(itemRegister.COMPACT_ENERGISED_STONE.get()));
+	ENERGISED("energised_armor", 37, new int[]{10, 12, 16, 6}, 30, SoundEvents.ARMOR_EQUIP_NETHERITE, 6.0F, 0.2F, () -> Ingredient.of(itemRegister.ENERGISED_STONE.get()));
 
 	private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
 	private final String name;

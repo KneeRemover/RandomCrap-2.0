@@ -1,0 +1,22 @@
+{
+  "name": "Energised Set",
+  "icon": "randomcrap:energised_helmet",
+  "category": "randomcrap:items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "text": "A set of armor made from (compact) energised stone. Repaired using regular energised stone.",
+      "item": "randomcrap:compact_energised_stone"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:energised_helmet",
+      "recipe2": "randomcrap:energised_chestplate"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:energised_leggings",
+      "recipe2": "randomcrap:energised_boots"
+    }
+  ]
+}

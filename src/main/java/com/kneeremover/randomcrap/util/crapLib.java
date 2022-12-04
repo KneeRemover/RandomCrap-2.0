@@ -37,4 +37,18 @@ public class crapLib {
 	public static Vector3d getFacingDir(@NotNull PlayerEntity player) {
 		return Vector3d.directionFromRotation(player.getRotationVector()).normalize();
 	}
+	public static int cyclePlus(int current, int min, int max) {
+		if (current >= max) {
+			return min;
+		} else {
+			return current + 1;
+		}
+	}
+	public static int cycleMinus(int current, int min, int max) {
+		if (current <= min) {
+			return max;
+		} else {
+			return current - 1;
+		}
+	}
 }

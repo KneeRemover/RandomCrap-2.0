@@ -19,7 +19,6 @@ import javax.annotation.Nonnull;
 
 import static java.lang.Math.abs;
 
-@Mod.EventBusSubscriber
 public class rocket extends Item {
 	public rocket(Properties properties) {
 		super(properties);

@@ -1,0 +1,16 @@
+{
+  "name": "Second Mouth",
+  "icon": "randomcrap:second_mouth",
+  "category": "randomcrap:items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "text": "While in your inventory, this item will eat the item in the 9th slot in your hotbar for you whenever you're hungry. (Can't do anything about the hotbar part at the moment, technical problems.)",
+      "item": "randomcrap:second_mouth"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomcrap:second_mouth"
+    }
+  ]
+}
